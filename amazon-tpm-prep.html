@@ -6,616 +6,777 @@
 <title>Amazon TPM Interview Prep</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-:root{
-  --bg:#07090f;
-  --surface:#0e1117;
-  --surface2:#151b26;
-  --glass:rgba(255,255,255,0.04);
-  --glass-border:rgba(255,255,255,0.08);
-  --text:#e8edf8;
-  --muted:rgba(232,237,248,0.45);
-  --orange:#FF9900;
-  --orange-dim:rgba(255,153,0,0.15);
-  --orange-glow:0 0 40px rgba(255,153,0,0.25);
-  --r:12px;
-  --font:'Inter',system-ui,sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-
-/* ─── SCROLLBAR ─── */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:rgba(255,153,0,0.3);border-radius:3px}
-
-/* ─── NAV ─── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  backdrop-filter:blur(20px);
-  background:rgba(7,9,15,0.8);
-  border-bottom:1px solid var(--glass-border);
-}
-.nav-wrap{
-  max-width:1100px;margin:0 auto;padding:0 28px;
-  display:flex;align-items:center;gap:6px;height:56px;
-}
-.nav-logo{
-  font-weight:800;font-size:0.9rem;
-  background:linear-gradient(90deg,#FF9900,#FFB347);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin-right:16px;white-space:nowrap;letter-spacing:-0.3px;
-}
-.nav-links{display:flex;gap:2px;flex-wrap:wrap}
-.nav-links a{
-  color:var(--muted);text-decoration:none;font-size:0.75rem;font-weight:500;
-  padding:5px 11px;border-radius:6px;transition:all .15s;white-space:nowrap;
-}
-.nav-links a:hover,.nav-links a.active{
-  color:var(--text);background:rgba(255,153,0,0.12);
-}
-.nav-links a.active{color:var(--orange)}
-
-/* ─── HERO ─── */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden;
-}
-.hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(255,153,0,0.15) 0%,transparent 70%),
-             radial-gradient(ellipse 50% 80% at 80% 60%,rgba(102,126,234,0.08) 0%,transparent 60%),
-             radial-gradient(ellipse 60% 60% at 20% 80%,rgba(118,75,162,0.06) 0%,transparent 60%),
-             var(--bg);
-}
-.hero-grid{
-  position:absolute;inset:0;z-index:0;
-  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
-  background-size:60px 60px;
-  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);
-}
-.hero-content{position:relative;z-index:1;max-width:720px}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--orange-dim);border:1px solid rgba(255,153,0,0.25);
-  color:var(--orange);font-size:0.75rem;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;
-  padding:6px 14px;border-radius:20px;margin-bottom:28px;
-}
-.hero-eyebrow span{width:6px;height:6px;background:var(--orange);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
-.hero h1{
-  font-size:clamp(2.8rem,7vw,5rem);font-weight:900;line-height:1.05;letter-spacing:-2px;
-  margin-bottom:20px;
-}
-.hero h1 .w1{color:var(--text)}
-.hero h1 .w2{
-  background:linear-gradient(135deg,#FF9900 0%,#FFB347 50%,#FF6B00 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
-.hero p{
-  font-size:1.05rem;color:var(--muted);max-width:480px;margin:0 auto 40px;line-height:1.7;
-}
-.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-primary{
-  background:linear-gradient(135deg,#FF9900,#FF6B00);color:#000;
-  font-weight:700;font-size:0.88rem;padding:12px 24px;border-radius:8px;
-  border:none;cursor:pointer;text-decoration:none;display:inline-block;
-  transition:transform .2s,box-shadow .2s;
-  box-shadow:0 4px 20px rgba(255,153,0,0.35);
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,153,0,0.5)}
-.btn-secondary{
-  background:var(--glass);border:1px solid var(--glass-border);color:var(--text);
-  font-weight:600;font-size:0.88rem;padding:12px 24px;border-radius:8px;
-  cursor:pointer;text-decoration:none;display:inline-block;
-  transition:background .2s,border-color .2s;backdrop-filter:blur(10px);
-}
-.btn-secondary:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15)}
-.hero-stats{
-  display:flex;gap:32px;justify-content:center;flex-wrap:wrap;
-  margin-top:60px;padding-top:40px;
-  border-top:1px solid var(--glass-border);
-}
-.stat{text-align:center}
-.stat-num{font-size:1.8rem;font-weight:900;color:var(--orange);line-height:1}
-.stat-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-top:4px}
-
-/* ─── LAYOUT ─── */
-.page{max-width:1100px;margin:0 auto;padding:40px 28px 100px}
-section{margin-bottom:96px;scroll-margin-top:76px}
-.section-head{margin-bottom:40px}
-.section-eyebrow{
-  font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
-  color:var(--orange);margin-bottom:10px;
-}
-.section-head h2{
-  font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-0.8px;
-  color:var(--text);margin-bottom:8px;
-}
-.section-head p{font-size:0.9rem;color:var(--muted);max-width:540px}
-
-/* ─── ROUND CARDS ─── */
-.round-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:900px){.round-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.round-grid{grid-template-columns:1fr}}
-
-.round-card{
-  position:relative;overflow:hidden;
-  background:var(--surface);
-  border:1px solid var(--glass-border);
-  border-radius:16px;padding:26px;cursor:pointer;
-  transition:transform .25s,box-shadow .25s,border-color .25s;
-}
-.round-card::before{
-  content:'';position:absolute;inset:0;border-radius:16px;opacity:0;
-  transition:opacity .25s;
-  background:linear-gradient(135deg,var(--c1),var(--c2));
-  z-index:0;
-}
-.round-card::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--c1),transparent);
-}
-.round-card:hover{transform:translateY(-4px);border-color:var(--c1)}
-.round-card:hover::before{opacity:0.06}
-.round-card:hover{box-shadow:0 16px 48px rgba(0,0,0,0.4),0 0 0 1px var(--c1)}
-.round-card *{position:relative;z-index:1}
-.rc-icon{font-size:1.8rem;margin-bottom:14px}
-.rc-badge{
-  display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.5px;
-  text-transform:uppercase;padding:3px 9px;border-radius:4px;
-  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
-  color:var(--muted);margin-bottom:12px;
-}
-.round-card h3{font-size:1.05rem;font-weight:700;margin-bottom:6px;color:var(--text)}
-.round-card p{font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:20px}
-.rc-footer{display:flex;align-items:center;justify-content:space-between}
-.rc-meta{font-size:0.72rem;color:var(--muted)}
-.rc-meta strong{color:var(--c1)}
-.rc-start{
-  background:linear-gradient(135deg,var(--c1),var(--c2));
-  color:#000;border:none;padding:7px 16px;border-radius:7px;
-  font-size:0.78rem;font-weight:700;cursor:pointer;
-  transition:opacity .15s,transform .15s;
-}
-.rc-start:hover{opacity:0.85;transform:scale(1.03)}
-
-.r1{--c1:#FF9900;--c2:#FF6B00}
-.r2{--c1:#ef4444;--c2:#dc2626}
-.r3{--c1:#3b82f6;--c2:#2563eb}
-.r4{--c1:#22c55e;--c2:#16a34a}
-.r5{--c1:#a855f7;--c2:#9333ea}
-.r6{--c1:#14b8a6;--c2:#0d9488}
-
-/* ─── LP GRID ─── */
-.lp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
-.lp-card{
-  background:var(--surface);border:1px solid var(--glass-border);
-  border-radius:12px;overflow:hidden;
-  transition:border-color .2s;
-}
-.lp-card:hover{border-color:rgba(255,153,0,0.3)}
-.lp-head{
-  display:flex;align-items:center;gap:12px;padding:14px 16px;
-  cursor:pointer;user-select:none;transition:background .15s;
-}
-.lp-head:hover{background:rgba(255,255,255,0.03)}
-.lp-num{
-  width:28px;height:28px;border-radius:8px;
-  background:linear-gradient(135deg,#FF9900,#FF6B00);
-  color:#000;font-size:0.72rem;font-weight:800;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.lp-title{font-size:0.88rem;font-weight:600;flex:1;color:var(--text)}
-.lp-check{accent-color:var(--orange);cursor:pointer;width:15px;height:15px;flex-shrink:0}
-.lp-arr{color:var(--muted);font-size:0.7rem;transition:transform .2s;margin-left:4px}
-.lp-head.open .lp-arr{transform:rotate(180deg)}
-.lp-body{
-  display:none;padding:0 16px 16px 56px;
-  border-top:1px solid var(--glass-border);
-}
-.lp-body.open{display:block}
-.lp-def{font-size:0.8rem;color:var(--muted);font-style:italic;margin:12px 0 10px;line-height:1.6}
-.lp-qs h4{font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,153,0,0.7);margin-bottom:6px}
-.lp-qs ul{padding-left:16px}
-.lp-qs li{font-size:0.81rem;color:rgba(232,237,248,0.6);margin-bottom:4px}
-
-/* ─── Q&A ─── */
-.qa-stack{display:flex;flex-direction:column;gap:8px}
-.qa-item{
-  background:var(--surface);border:1px solid var(--glass-border);
-  border-radius:12px;overflow:hidden;
-  transition:border-color .2s;
-}
-.qa-item:hover{border-color:rgba(255,153,0,0.2)}
-.qa-q{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:14px 18px;cursor:pointer;font-size:0.88rem;font-weight:600;
-  color:var(--text);transition:background .15s;
-}
-.qa-q:hover{background:rgba(255,255,255,0.03)}
-.qa-tag{
-  font-size:0.68rem;font-weight:600;padding:2px 8px;border-radius:6px;
-  background:rgba(255,153,0,0.12);border:1px solid rgba(255,153,0,0.2);
-  color:var(--orange);white-space:nowrap;flex-shrink:0;
-}
-.qa-arr{color:var(--muted);font-size:0.7rem;transition:transform .2s;flex-shrink:0}
-.qa-q.open .qa-arr{transform:rotate(180deg)}
-.qa-a{display:none;padding:12px 18px 16px;border-top:1px solid var(--glass-border)}
-.qa-a.open{display:block}
-.qa-a p{font-size:0.84rem;color:rgba(232,237,248,0.65);line-height:1.7;margin-bottom:10px}
-.qa-tip{
-  background:rgba(255,153,0,0.07);border:1px solid rgba(255,153,0,0.15);
-  border-left:3px solid var(--orange);
-  border-radius:0 8px 8px 0;padding:10px 14px;
-  font-size:0.8rem;color:rgba(232,237,248,0.6);line-height:1.6;
+/* ─── DESIGN TOKENS ─────────────────────────────────── */
+:root {
+  --bg:       #06060a;
+  --s1:       #0c0c14;
+  --s2:       #10101a;
+  --border:   rgba(255,255,255,0.07);
+  --border2:  rgba(255,255,255,0.12);
+  --text:     #eeeef8;
+  --dim:      rgba(238,238,248,0.45);
+  --dimmer:   rgba(238,238,248,0.25);
+  --orange:   #FF9900;
+  --og2:      #FF6B00;
+  --heading:  'Space Grotesk', sans-serif;
+  --body:     'Inter', sans-serif;
 }
 
-/* ─── CALLOUT ─── */
-.callout{
-  background:rgba(255,153,0,0.06);
-  border:1px solid rgba(255,153,0,0.15);
-  border-radius:12px;padding:18px 20px;
-  font-size:0.84rem;color:rgba(232,237,248,0.65);line-height:1.7;
-  margin-bottom:24px;
+/* ─── RESET ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
 }
-.callout strong{color:var(--orange)}
-.callout ul{padding-left:18px;margin-top:6px}
-.callout li{margin-bottom:4px}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,153,0,0.25); border-radius: 3px; }
 
-/* ─── CHECKLIST ─── */
-.check-section{margin-bottom:32px}
-.check-section-title{
-  font-size:0.68rem;text-transform:uppercase;letter-spacing:1.2px;
-  color:rgba(255,153,0,0.6);margin-bottom:10px;
-  padding-bottom:8px;border-bottom:1px solid var(--glass-border);
+/* ─── NAV ────────────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  height: 64px;
+  display: flex; align-items: center;
+  padding: 0 48px;
+  background: rgba(6,6,10,0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
 }
-.check-item{
-  display:flex;align-items:flex-start;gap:10px;
-  padding:7px 0;cursor:pointer;
+.nav-logo {
+  font-family: var(--heading);
+  font-weight: 700; font-size: 1rem; letter-spacing: -0.3px;
+  color: var(--text);
+  text-decoration: none; margin-right: auto;
+  display: flex; align-items: center; gap: 8px;
 }
-.check-item input{accent-color:var(--orange);margin-top:3px;cursor:pointer;flex-shrink:0}
-.check-item label{font-size:0.84rem;color:rgba(232,237,248,0.65);cursor:pointer;line-height:1.5}
-.check-item.done label{text-decoration:line-through;color:var(--muted)}
+.nav-logo-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 8px var(--orange);
+  animation: breathe 3s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.5; transform:scale(0.7); }
+}
+.nav-links {
+  display: flex; gap: 2px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.8rem; font-weight: 500;
+  color: var(--dim); text-decoration: none;
+  padding: 6px 14px; border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.on { color: var(--text); background: rgba(255,255,255,0.06); }
+.nav-links a.on { color: var(--orange); }
+.nav-cta {
+  margin-left: 24px;
+  background: var(--orange); color: #000;
+  font-size: 0.8rem; font-weight: 700;
+  padding: 8px 18px; border-radius: 8px;
+  text-decoration: none; white-space: nowrap;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
 
-/* ─── PROGRESS BAR ─── */
-.prog-track{
-  background:var(--surface);border:1px solid var(--glass-border);
-  border-radius:12px;padding:18px 22px;margin-bottom:28px;
-  display:flex;align-items:center;gap:16px;
+/* ─── HERO ────────────────────────────────────────────── */
+.hero {
+  position: relative; overflow: hidden;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
 }
-.prog-track label{font-size:0.78rem;color:var(--muted);white-space:nowrap}
-.prog-bar{flex:1;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}
-.prog-fill{
-  height:100%;border-radius:3px;
-  background:linear-gradient(90deg,#FF9900,#FFB347);
-  transition:width .4s ease;width:0%;
+/* space background layers */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% -5%,  rgba(255,153,0,0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 70% at 15% 60%,  rgba(124,58,237,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 85% 70%,  rgba(59,130,246,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 50% at 50% 100%,rgba(255,153,0,0.04) 0%, transparent 60%),
+    var(--bg);
 }
-.prog-count{font-size:0.78rem;font-weight:700;color:var(--orange);white-space:nowrap}
+/* star canvas fills here via JS */
+#starCanvas {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+}
+/* subtle grain */
+.hero-grain {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.4; pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; max-width: 800px; }
 
-/* ─── RESOURCES ─── */
-.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-.res-card{
-  background:var(--surface);border:1px solid var(--glass-border);
-  border-radius:12px;padding:18px;
-  transition:border-color .2s,transform .2s;
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,153,0,0.08);
+  border: 1px solid rgba(255,153,0,0.2);
+  color: var(--orange);
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 100px;
+  margin-bottom: 32px;
 }
-.res-card:hover{border-color:rgba(255,153,0,0.2);transform:translateY(-2px)}
-.res-card h4{font-size:0.88rem;font-weight:700;color:var(--text);margin-bottom:6px}
-.res-card p{font-size:0.78rem;color:var(--muted);margin-bottom:12px;line-height:1.6}
-.res-card a{
-  font-size:0.78rem;font-weight:600;color:var(--orange);text-decoration:none;
-  display:inline-flex;align-items:center;gap:4px;
-  transition:gap .15s;
-}
-.res-card a:hover{gap:8px}
-
-/* ─── PRACTICE OVERLAY ─── */
-#overlay{
-  display:none;position:fixed;inset:0;z-index:500;
-  align-items:center;justify-content:center;padding:20px;
-  background:rgba(0,0,0,0.85);
-  backdrop-filter:blur(8px);
-}
-#overlay.open{display:flex}
-
-.modal{
-  width:100%;max-width:720px;max-height:92vh;
-  background:var(--surface2);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:20px;
-  display:flex;flex-direction:column;overflow:hidden;
-  box-shadow:0 32px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.05);
-  animation:modalIn .25s ease;
-}
-@keyframes modalIn{from{opacity:0;transform:scale(0.96) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
-
-.modal-head{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px 24px;border-bottom:1px solid var(--glass-border);
-  background:rgba(255,255,255,0.02);flex-shrink:0;
-}
-.mh-left h2{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:2px}
-.mh-left .sub{font-size:0.72rem;color:var(--muted)}
-.mh-right{display:flex;align-items:center;gap:10px}
-.m-timer{
-  font-size:0.95rem;font-weight:800;
-  color:var(--orange);
-  background:rgba(255,153,0,0.1);
-  border:1px solid rgba(255,153,0,0.2);
-  padding:5px 14px;border-radius:8px;
-  min-width:68px;text-align:center;
-  font-variant-numeric:tabular-nums;
-  transition:color .3s,background .3s,border-color .3s;
-}
-.m-timer.red{color:#ef4444;background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.2)}
-.m-close{
-  width:32px;height:32px;border-radius:8px;
-  background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);
-  color:var(--muted);font-size:1rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .15s,color .15s;
-}
-.m-close:hover{background:rgba(239,68,68,0.15);color:#ef4444;border-color:rgba(239,68,68,0.2)}
-
-.m-pbar{height:2px;background:rgba(255,255,255,0.06);flex-shrink:0}
-.m-pbar-fill{height:100%;background:linear-gradient(90deg,#FF9900,#FFB347);transition:width .4s ease}
-
-.m-body{padding:28px 24px;flex:1;overflow-y:auto}
-.q-meta{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.q-num{font-size:0.72rem;color:var(--muted);font-weight:600}
-.q-lp{
-  font-size:0.68rem;font-weight:600;padding:2px 8px;border-radius:6px;
-  background:rgba(255,153,0,0.1);border:1px solid rgba(255,153,0,0.2);color:var(--orange);
-}
-.q-diff{font-size:0.68rem;font-weight:600;padding:2px 8px;border-radius:6px}
-.d-core{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);color:#60a5fa}
-.d-medium{background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.2);color:#fbbf24}
-.d-hard{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:#f87171}
-
-.q-text{
-  font-size:1.1rem;font-weight:700;color:var(--text);
-  line-height:1.55;margin-bottom:22px;letter-spacing:-0.2px;
+.hero-badge::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 6px var(--orange);
+  animation: breathe 2s ease-in-out infinite;
 }
 
-.hint-box{background:rgba(255,255,255,0.03);border:1px solid var(--glass-border);border-radius:10px;overflow:hidden}
-.hint-trigger{
-  width:100%;padding:12px 16px;
-  background:none;border:none;text-align:left;
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:0.82rem;font-weight:600;color:var(--muted);cursor:pointer;
-  transition:background .15s,color .15s;
+.hero h1 {
+  font-family: var(--heading);
+  font-size: clamp(3rem,8vw,6rem);
+  font-weight: 700; letter-spacing: -3px; line-height: 1.0;
+  margin-bottom: 24px;
 }
-.hint-trigger:hover{background:rgba(255,255,255,0.03);color:var(--text)}
-.hint-trigger .arr{font-size:0.7rem;transition:transform .2s}
-.hint-trigger.open .arr{transform:rotate(180deg)}
-.hint-content{
-  display:none;padding:16px;border-top:1px solid var(--glass-border);
-  font-size:0.83rem;color:rgba(232,237,248,0.6);line-height:1.7;
+.hero h1 .line1 { display: block; color: var(--text); }
+.hero h1 .line2 {
+  display: block;
+  background: linear-gradient(90deg, #FF9900 0%, #FFD166 50%, #FF6B00 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.hint-content.open{display:block}
-.hint-content ul{padding-left:18px}
-.hint-content li{margin-bottom:5px}
-.hint-content p{margin-bottom:8px}
-.hint-eg{
-  margin-top:12px;padding:12px 14px;
-  background:rgba(255,153,0,0.06);border:1px solid rgba(255,153,0,0.12);
-  border-left:3px solid var(--orange);
-  border-radius:0 8px 8px 0;
-  font-style:italic;font-size:0.8rem;color:rgba(232,237,248,0.5);
+.hero-sub {
+  font-size: 1.05rem; color: var(--dim);
+  max-width: 520px; margin: 0 auto 40px; line-height: 1.75;
+}
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-og {
+  background: linear-gradient(135deg, #FF9900, #FF6B00);
+  color: #000; font-weight: 700; font-size: 0.88rem;
+  padding: 13px 28px; border-radius: 10px;
+  border: none; cursor: pointer; text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 0 32px rgba(255,153,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-og:hover { transform: translateY(-2px); box-shadow: 0 0 48px rgba(255,153,0,0.5); }
+.btn-ghost {
+  background: rgba(255,255,255,0.05);
+  color: var(--text); font-weight: 600; font-size: 0.88rem;
+  padding: 13px 28px; border-radius: 10px;
+  border: 1px solid var(--border2);
+  cursor: pointer; text-decoration: none; display: inline-block;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.2); }
+
+/* stats strip */
+.hero-stats {
+  position: relative; z-index: 2;
+  display: flex; gap: 0; flex-wrap: wrap;
+  margin-top: 80px;
+  border-top: 1px solid var(--border);
+  width: 100%; max-width: 700px;
+}
+.stat {
+  flex: 1; min-width: 140px;
+  padding: 28px 20px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--heading);
+  font-size: 2.2rem; font-weight: 700; line-height: 1;
+  background: linear-gradient(135deg, #FF9900, #FFD166);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-l { font-size: 0.7rem; color: var(--dimmer); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+/* ─── SECTIONS ────────────────────────────────────────── */
+.section { padding: 100px 0; }
+.section-inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+
+.section-tag {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--heading);
+  font-size: clamp(1.8rem,3.5vw,2.6rem);
+  font-weight: 700; letter-spacing: -1px; line-height: 1.1;
+  color: var(--text); margin-bottom: 12px;
+}
+.section-sub {
+  font-size: 0.92rem; color: var(--dim);
+  max-width: 500px; line-height: 1.7;
 }
 
-.m-foot{padding:16px 24px 20px;border-top:1px solid var(--glass-border);flex-shrink:0}
-.rate-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.rate-label{font-size:0.72rem;color:var(--muted);font-weight:600}
-.rate-btn{
-  padding:5px 14px;border-radius:20px;font-size:0.76rem;font-weight:600;
-  cursor:pointer;border:1px solid transparent;transition:all .15s;
+/* ─── DIVIDER LINE ────────────────────────────────────── */
+.divline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);
+  margin: 0 48px;
 }
-.rate-btn.nailed{background:rgba(34,197,94,0.1);border-color:rgba(34,197,94,0.2);color:#4ade80}
-.rate-btn.ok{background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.2);color:#fbbf24}
-.rate-btn.struggled{background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.2);color:#f87171}
-.rate-btn.skip{background:rgba(255,255,255,0.05);border-color:var(--glass-border);color:var(--muted)}
-.rate-btn.sel{box-shadow:0 0 0 2px currentColor}
 
-.nav-row{display:flex;align-items:center;justify-content:space-between}
-.m-nav-btn{
-  padding:8px 20px;border-radius:8px;font-size:0.82rem;font-weight:600;
-  cursor:pointer;border:1px solid var(--glass-border);
-  background:rgba(255,255,255,0.04);color:var(--text);
-  transition:background .15s,border-color .15s;
+/* ─── ROUND CARDS (Moonsworth company showcase) ─────── */
+.round-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 56px;
 }
-.m-nav-btn:hover:not(:disabled){background:rgba(255,255,255,0.08)}
-.m-nav-btn:disabled{opacity:0.3;cursor:default}
-.m-nav-btn.primary{
-  background:linear-gradient(135deg,#FF9900,#FF6B00);
-  border-color:transparent;color:#000;
+@media(max-width:900px){ .round-grid{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:560px){ .round-grid{ grid-template-columns:1fr; } }
+
+.rcard {
+  position: relative; overflow: hidden;
+  background: var(--s1);
+  padding: 36px 32px 32px;
+  cursor: pointer;
+  transition: background 0.3s;
+  min-height: 280px;
+  display: flex; flex-direction: column;
 }
-.m-nav-btn.primary:hover:not(:disabled){opacity:0.9}
-.q-ctr{font-size:0.78rem;color:var(--muted);font-weight:600}
-
-/* RESULTS */
-#resultsView{display:none;padding:36px 24px;text-align:center;flex:1;overflow-y:auto}
-#resultsView.open{display:block}
-.res-trophy{font-size:3rem;margin-bottom:16px}
-#resultsView h2{font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:6px}
-#resultsView .sub{font-size:0.85rem;color:var(--muted);margin-bottom:32px}
-.res-bars{max-width:360px;margin:0 auto 28px;text-align:left}
-.res-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.res-label{font-size:0.78rem;color:var(--muted);width:90px}
-.res-bg{flex:1;height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden}
-.res-fill{height:100%;border-radius:4px;transition:width .6s ease}
-.res-n{font-size:0.78rem;font-weight:700;width:22px;text-align:right;color:var(--text)}
-.res-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.res-actions button{
-  padding:10px 24px;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;border:none;
-  transition:opacity .15s,transform .15s;
+.rcard::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background: var(--rgrad);
+  opacity: 0;
+  transition: opacity 0.35s;
 }
-.res-actions button:hover{opacity:0.85;transform:translateY(-1px)}
-.res-retry{background:linear-gradient(135deg,#FF9900,#FF6B00);color:#000}
-.res-exit{background:rgba(255,255,255,0.06);color:var(--text);border:1px solid var(--glass-border) !important}
+.rcard:hover { background: var(--s2); }
+.rcard:hover::before { opacity: 1; }
+.rcard > * { position: relative; z-index: 1; }
 
-/* ─── MISC ─── */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:700px){.two-col{grid-template-columns:1fr}}
-@media(max-width:600px){.hero h1{letter-spacing:-1px}}
+/* subtle top accent line per card */
+.rcard::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: var(--rcolor);
+  opacity: 0.6;
+}
 
-/* Scroll reveal */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+.rcard-icon { font-size: 2rem; margin-bottom: 20px; }
+.rcard-tag {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--rcolor); margin-bottom: 10px;
+}
+.rcard-title {
+  font-family: var(--heading);
+  font-size: 1.2rem; font-weight: 700; letter-spacing: -0.3px;
+  color: var(--text); margin-bottom: 8px;
+}
+.rcard-desc { font-size: 0.82rem; color: var(--dim); line-height: 1.65; flex: 1; }
+.rcard-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 24px; padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.rcard-meta { font-size: 0.7rem; color: var(--dimmer); }
+.rcard-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.78rem; font-weight: 600;
+  color: var(--rcolor); background: none; border: none; cursor: pointer;
+  padding: 0;
+  transition: gap 0.2s;
+}
+.rcard-btn:hover { gap: 10px; }
+
+/* per-card color variables */
+.rc-1 { --rcolor:#FF9900; --rgrad:radial-gradient(ellipse 80% 80% at 0% 0%,rgba(255,153,0,0.12),transparent); }
+.rc-2 { --rcolor:#f87171; --rgrad:radial-gradient(ellipse 80% 80% at 0% 0%,rgba(248,113,113,0.12),transparent); }
+.rc-3 { --rcolor:#60a5fa; --rgrad:radial-gradient(ellipse 80% 80% at 0% 0%,rgba(96,165,250,0.12),transparent); }
+.rc-4 { --rcolor:#4ade80; --rgrad:radial-gradient(ellipse 80% 80% at 0% 0%,rgba(74,222,128,0.12),transparent); }
+.rc-5 { --rcolor:#c084fc; --rgrad:radial-gradient(ellipse 80% 80% at 0% 0%,rgba(192,132,252,0.12),transparent); }
+.rc-6 { --rcolor:#2dd4bf; --rgrad:radial-gradient(ellipse 80% 80% at 0% 0%,rgba(45,212,191,0.12),transparent); }
+
+/* ─── LP GRID ─────────────────────────────────────────── */
+.lp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 48px;
+}
+.lp-card { background: var(--s1); }
+.lp-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 18px; cursor: pointer; user-select: none;
+  transition: background 0.2s;
+}
+.lp-head:hover { background: var(--s2); }
+.lp-badge {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: rgba(255,153,0,0.12);
+  border: 1px solid rgba(255,153,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700; color: var(--orange);
+}
+.lp-name { font-size: 0.86rem; font-weight: 600; flex: 1; color: var(--text); }
+.lp-chk { accent-color: var(--orange); cursor: pointer; }
+.lp-arr { font-size: 0.65rem; color: var(--dimmer); transition: transform 0.2s; }
+.lp-head.open .lp-arr { transform: rotate(180deg); }
+.lp-body {
+  display: none; padding: 0 18px 18px 58px;
+  border-top: 1px solid var(--border);
+}
+.lp-body.open { display: block; }
+.lp-def { font-size: 0.8rem; color: var(--dimmer); font-style: italic; margin: 14px 0 12px; line-height: 1.65; }
+.lp-qs-title { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,153,0,0.6); margin-bottom: 8px; }
+.lp-qs ul { padding-left: 14px; }
+.lp-qs li { font-size: 0.79rem; color: var(--dim); margin-bottom: 5px; line-height: 1.55; }
+
+/* ─── Q&A ─────────────────────────────────────────────── */
+.qa-stack { display: flex; flex-direction: column; gap: 6px; margin-top: 40px; }
+.qa-card {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+  transition: border-color 0.2s;
+}
+.qa-card:hover { border-color: var(--border2); }
+.qa-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 16px 20px; cursor: pointer;
+  transition: background 0.15s;
+}
+.qa-top:hover { background: rgba(255,255,255,0.025); }
+.qa-q-text { font-size: 0.88rem; font-weight: 500; color: var(--text); flex: 1; line-height: 1.5; }
+.qa-lp-tag {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.4px;
+  background: rgba(255,153,0,0.08); border: 1px solid rgba(255,153,0,0.18);
+  color: var(--orange); padding: 3px 8px; border-radius: 6px; white-space: nowrap; flex-shrink: 0;
+}
+.qa-arr { font-size: 0.65rem; color: var(--dimmer); transition: transform 0.2s; flex-shrink: 0; }
+.qa-top.open .qa-arr { transform: rotate(180deg); }
+.qa-body { display: none; padding: 0 20px 18px; border-top: 1px solid var(--border); }
+.qa-body.open { display: block; }
+.qa-ans { font-size: 0.83rem; color: var(--dim); line-height: 1.75; margin: 14px 0 10px; }
+.qa-tip-box {
+  background: rgba(255,153,0,0.05);
+  border: 1px solid rgba(255,153,0,0.12);
+  border-left: 2px solid var(--orange);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  font-size: 0.79rem; color: var(--dimmer); line-height: 1.65;
+}
+
+/* ─── CALLOUT ─────────────────────────────────────────── */
+.callout {
+  background: rgba(255,153,0,0.04);
+  border: 1px solid rgba(255,153,0,0.12);
+  border-radius: 12px; padding: 20px 22px;
+  font-size: 0.84rem; color: var(--dim); line-height: 1.75;
+  margin-bottom: 0; margin-top: 32px;
+}
+.callout strong { color: var(--orange); }
+.callout ul { padding-left: 18px; margin-top: 8px; }
+.callout li { margin-bottom: 5px; }
+
+/* ─── CHECKLIST ───────────────────────────────────────── */
+.cl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px,1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 40px;
+}
+.cl-section { background: var(--s1); padding: 28px; }
+.cl-section-title {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,153,0,0.55); margin-bottom: 16px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.cl-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; cursor: pointer; }
+.cl-item input { accent-color: var(--orange); margin-top: 3px; cursor: pointer; flex-shrink: 0; }
+.cl-item label { font-size: 0.82rem; color: var(--dim); cursor: pointer; line-height: 1.5; }
+.cl-item.done label { text-decoration: line-through; color: var(--dimmer); }
+
+/* progress */
+.prog-bar-wrap {
+  background: var(--s1); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 24px;
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 36px; margin-bottom: -8px;
+}
+.prog-label { font-size: 0.78rem; color: var(--dimmer); white-space: nowrap; }
+.prog-track { flex: 1; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; background: linear-gradient(90deg,#FF9900,#FFD166); border-radius: 2px; transition: width .4s ease; width: 0%; }
+.prog-num { font-size: 0.78rem; font-weight: 700; color: var(--orange); white-space: nowrap; }
+
+/* ─── RESOURCES ───────────────────────────────────────── */
+.res-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 48px;
+}
+@media(max-width:800px){ .res-grid{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:500px){ .res-grid{ grid-template-columns:1fr; } }
+.res-item {
+  background: var(--s1); padding: 26px 24px;
+  transition: background 0.2s;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.res-item:hover { background: var(--s2); }
+.res-item h4 { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.res-item p  { font-size: 0.78rem; color: var(--dimmer); line-height: 1.6; flex: 1; }
+.res-item a  {
+  font-size: 0.78rem; font-weight: 600; color: var(--orange);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+  transition: gap 0.2s;
+}
+.res-item a:hover { gap: 8px; }
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 48px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+footer p { font-size: 0.78rem; color: var(--dimmer); }
+footer a { font-size: 0.78rem; color: var(--dimmer); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--orange); }
+.footer-links { display: flex; gap: 20px; }
+
+/* ─── PRACTICE OVERLAY ────────────────────────────────── */
+#overlay {
+  display: none; position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(12px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+#overlay.open { display: flex; }
+
+.modal {
+  width: 100%; max-width: 700px; max-height: 92vh;
+  background: #0f0f18;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,153,0,0.05);
+  animation: mopen .22s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes mopen {
+  from { opacity:0; transform: scale(0.94) translateY(20px); }
+  to   { opacity:1; transform: scale(1)    translateY(0); }
+}
+
+.mhead {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.02); flex-shrink: 0;
+}
+.mhead-l h2 { font-family: var(--heading); font-size: 0.95rem; font-weight: 700; }
+.mhead-l .msub { font-size: 0.7rem; color: var(--dimmer); margin-top: 2px; }
+.mhead-r { display: flex; align-items: center; gap: 10px; }
+.mtimer {
+  font-family: var(--heading); font-size: 0.95rem; font-weight: 700;
+  color: var(--orange);
+  background: rgba(255,153,0,0.08); border: 1px solid rgba(255,153,0,0.18);
+  padding: 5px 14px; border-radius: 8px; min-width: 66px; text-align: center;
+  transition: color .3s, background .3s;
+}
+.mtimer.red { color: #f87171; background: rgba(248,113,113,0.08); border-color: rgba(248,113,113,0.2); }
+.mclose {
+  width: 30px; height: 30px; border-radius: 7px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  color: var(--dimmer); font-size: 0.9rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s, color .15s;
+}
+.mclose:hover { background: rgba(248,113,113,0.15); color: #f87171; }
+
+.mpbar { height: 2px; background: rgba(255,255,255,0.05); flex-shrink: 0; }
+.mpbar-fill { height: 100%; background: linear-gradient(90deg,#FF9900,#FFD166); transition: width .4s ease; }
+
+.mbody { padding: 28px 24px; flex: 1; overflow-y: auto; }
+.qmeta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.qnum { font-size: 0.7rem; color: var(--dimmer); font-weight: 500; }
+.qlp {
+  font-size: 0.65rem; font-weight: 600;
+  background: rgba(255,153,0,0.08); border: 1px solid rgba(255,153,0,0.18);
+  color: var(--orange); padding: 2px 8px; border-radius: 5px;
+}
+.qdiff { font-size: 0.65rem; font-weight: 600; padding: 2px 8px; border-radius: 5px; }
+.d-core   { background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.2); color:#60a5fa; }
+.d-medium { background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.2); color:#fbbf24; }
+.d-hard   { background:rgba(248,113,113,0.1); border:1px solid rgba(248,113,113,0.2); color:#f87171; }
+
+.qtext {
+  font-family: var(--heading);
+  font-size: 1.15rem; font-weight: 600; letter-spacing: -0.3px;
+  color: var(--text); line-height: 1.5; margin-bottom: 24px;
+}
+
+.hint-wrap { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.hint-btn {
+  width: 100%; padding: 12px 16px; background: none; border: none;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.8rem; font-weight: 500; color: var(--dimmer); cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.hint-btn:hover { background: rgba(255,255,255,0.03); color: var(--text); }
+.hint-btn .arr { font-size: 0.65rem; transition: transform .2s; }
+.hint-btn.open .arr { transform: rotate(180deg); }
+.hint-content {
+  display: none; padding: 16px; border-top: 1px solid var(--border);
+  font-size: 0.82rem; color: var(--dim); line-height: 1.75;
+}
+.hint-content.open { display: block; }
+.hint-content ul { padding-left: 18px; }
+.hint-content li { margin-bottom: 5px; }
+.hint-content p  { margin-bottom: 8px; }
+.hint-eg {
+  margin-top: 12px; padding: 12px 14px;
+  background: rgba(255,153,0,0.05); border: 1px solid rgba(255,153,0,0.1);
+  border-left: 2px solid var(--orange);
+  border-radius: 0 8px 8px 0;
+  font-style: italic; font-size: 0.79rem; color: var(--dimmer);
+}
+
+.mfoot { padding: 16px 24px 20px; border-top: 1px solid rgba(255,255,255,0.07); flex-shrink: 0; }
+.rate-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.rate-lbl { font-size: 0.7rem; color: var(--dimmer); font-weight: 500; }
+.rbtn {
+  font-size: 0.74rem; font-weight: 600; padding: 5px 13px;
+  border-radius: 100px; cursor: pointer; border: 1px solid transparent;
+  transition: all .15s;
+}
+.rbtn.nailed   { background:rgba(74,222,128,0.08);  border-color:rgba(74,222,128,0.2);  color:#4ade80; }
+.rbtn.ok       { background:rgba(251,191,36,0.08);  border-color:rgba(251,191,36,0.2);  color:#fbbf24; }
+.rbtn.struggled{ background:rgba(248,113,113,0.08); border-color:rgba(248,113,113,0.2); color:#f87171; }
+.rbtn.skip     { background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.1); color:var(--dimmer); }
+.rbtn.sel      { box-shadow: 0 0 0 2px currentColor; }
+.mnav-row { display: flex; align-items: center; justify-content: space-between; }
+.mnav-btn {
+  font-size: 0.82rem; font-weight: 600; padding: 8px 20px; border-radius: 9px;
+  cursor: pointer; border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04); color: var(--text);
+  transition: background .15s;
+}
+.mnav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.08); }
+.mnav-btn:disabled { opacity: .3; cursor: default; }
+.mnav-btn.primary {
+  background: linear-gradient(135deg,#FF9900,#FF6B00);
+  border-color: transparent; color: #000;
+}
+.mnav-btn.primary:hover:not(:disabled) { opacity: .88; }
+.mctr { font-size: 0.76rem; color: var(--dimmer); font-weight: 500; }
+
+/* Results */
+#rview { display:none; padding:36px 24px; text-align:center; flex:1; overflow-y:auto; }
+#rview.open { display:block; }
+.rtrophy { font-size: 3rem; margin-bottom: 16px; }
+#rview h2 { font-family:var(--heading); font-size:1.4rem; font-weight:700; margin-bottom:8px; }
+#rview .rsub { font-size:.85rem; color:var(--dimmer); margin-bottom:32px; }
+.rbars { max-width:360px; margin:0 auto 28px; text-align:left; }
+.rbar-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.rbar-label { font-size:.76rem; color:var(--dimmer); width:88px; }
+.rbar-bg { flex:1; height:6px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden; }
+.rbar-fill { height:100%; border-radius:3px; transition:width .6s ease; }
+.rbar-n { font-size:.76rem; font-weight:700; width:20px; text-align:right; color:var(--text); }
+.ract-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.ract-row button { padding:10px 24px; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; border:none; transition:opacity .15s,transform .15s; }
+.ract-row button:hover { opacity:.85; transform:translateY(-1px); }
+.r-retry { background:linear-gradient(135deg,#FF9900,#FF6B00); color:#000; }
+.r-exit  { background:rgba(255,255,255,0.06); color:var(--text); border:1px solid rgba(255,255,255,0.1) !important; }
+
+/* ─── REVEAL ANIMATION ────────────────────────────────── */
+.reveal { opacity:0; transform:translateY(32px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.in { opacity:1; transform:translateY(0); }
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:768px) {
+  .nav { padding:0 24px; }
+  .section-inner { padding:0 24px; }
+  .divline { margin:0 24px; }
+  footer { padding:32px 24px; }
+  .hero-stats { max-width:100%; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-wrap">
-    <div class="nav-logo">TPM Prep · Amazon</div>
-    <div class="nav-links">
-      <a href="#practice">Practice</a>
-      <a href="#lps">LPs</a>
-      <a href="#behavioral">Behavioral</a>
-      <a href="#sysdesign">System Design</a>
-      <a href="#pm">Prog Mgmt</a>
-      <a href="#product">Product</a>
-      <a href="#checklist">Checklist</a>
-      <a href="#resources">Resources</a>
-    </div>
-  </div>
+<!-- ── NAV ────────────────────────────────────────────── -->
+<nav class="nav">
+  <a href="#" class="nav-logo"><span class="nav-logo-dot"></span>TPM Prep</a>
+  <ul class="nav-links">
+    <li><a href="#practice">Practice</a></li>
+    <li><a href="#lps">LPs</a></li>
+    <li><a href="#behavioral">Behavioral</a></li>
+    <li><a href="#design">System Design</a></li>
+    <li><a href="#pm">Prog Mgmt</a></li>
+    <li><a href="#checklist">Checklist</a></li>
+  </ul>
+  <a href="#resources" class="nav-cta">Resources →</a>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
+<!-- ── HERO ───────────────────────────────────────────── -->
+<section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <canvas id="starCanvas"></canvas>
+  <div class="hero-grain"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow"><span></span>Amazon Interview Prep</div>
+    <div class="hero-badge">Amazon Interview Prep</div>
     <h1>
-      <span class="w1">Ace Your </span><span class="w2">Amazon TPM</span><br/>
-      <span class="w1">Interview Loop</span>
+      <span class="line1">Ace Your</span>
+      <span class="line2">Amazon TPM Loop</span>
     </h1>
-    <p>Practice every round, study all 16 Leadership Principles, review system design frameworks, and track your readiness — all in one place.</p>
-    <div class="hero-ctas">
-      <a href="#practice" class="btn-primary">Start Practicing</a>
-      <a href="#checklist" class="btn-secondary">Check Readiness</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Interview Rounds</div></div>
-      <div class="stat"><div class="stat-num">16</div><div class="stat-label">Leadership Principles</div></div>
-      <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Practice Questions</div></div>
-      <div class="stat"><div class="stat-num">5h</div><div class="stat-label">Total Prep Time</div></div>
+    <p class="hero-sub">Practice every round, study all 16 Leadership Principles, master system design, and track your readiness — all in one place.</p>
+    <div class="hero-btns">
+      <a href="#practice" class="btn-og">Start Practicing</a>
+      <a href="#checklist" class="btn-ghost">Check Readiness</a>
     </div>
   </div>
-</div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">6</div><div class="stat-l">Interview Rounds</div></div>
+    <div class="stat"><div class="stat-n">16</div><div class="stat-l">Leadership Principles</div></div>
+    <div class="stat"><div class="stat-n">40+</div><div class="stat-l">Practice Questions</div></div>
+    <div class="stat"><div class="stat-n">5h</div><div class="stat-l">Total Prep Time</div></div>
+  </div>
+</section>
 
-<!-- PRACTICE OVERLAY -->
+<!-- ── PRACTICE OVERLAY ────────────────────────────────── -->
 <div id="overlay">
   <div class="modal">
-    <div id="questionView" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
-      <div class="modal-head">
-        <div class="mh-left">
-          <h2 id="mName"></h2>
-          <div class="sub" id="mMeta"></div>
-        </div>
-        <div class="mh-right">
-          <div class="m-timer" id="mTimer">45:00</div>
-          <button class="m-close" onclick="closePractice()">✕</button>
+    <div id="qview" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+      <div class="mhead">
+        <div class="mhead-l"><h2 id="mName"></h2><div class="msub" id="mMeta"></div></div>
+        <div class="mhead-r">
+          <div class="mtimer" id="mTimer">45:00</div>
+          <button class="mclose" onclick="closePractice()">✕</button>
         </div>
       </div>
-      <div class="m-pbar"><div class="m-pbar-fill" id="mPbar"></div></div>
-      <div class="m-body">
-        <div class="q-meta">
-          <span class="q-num" id="mQNum"></span>
-          <span class="q-lp" id="mLP"></span>
-          <span class="q-diff" id="mDiff"></span>
+      <div class="mpbar"><div class="mpbar-fill" id="mPb"></div></div>
+      <div class="mbody">
+        <div class="qmeta">
+          <span class="qnum" id="mQN"></span>
+          <span class="qlp" id="mLP"></span>
+          <span class="qdiff" id="mDiff"></span>
         </div>
-        <div class="q-text" id="mQ"></div>
-        <div class="hint-box">
-          <button class="hint-trigger" onclick="toggleHint(this)">
-            <span>Show Framework &amp; Hints</span>
-            <span class="arr">▼</span>
+        <div class="qtext" id="mQ"></div>
+        <div class="hint-wrap">
+          <button class="hint-btn" onclick="toggleHint(this)">
+            <span>Show Framework &amp; Hints</span><span class="arr">▼</span>
           </button>
           <div class="hint-content" id="mHint"></div>
         </div>
       </div>
-      <div class="m-foot">
+      <div class="mfoot">
         <div class="rate-row">
-          <span class="rate-label">How'd it go?</span>
-          <button class="rate-btn nailed" onclick="rate('nailed')">Nailed it</button>
-          <button class="rate-btn ok" onclick="rate('ok')">Needs work</button>
-          <button class="rate-btn struggled" onclick="rate('struggled')">Struggled</button>
-          <button class="rate-btn skip" onclick="rate('skip')">Skip</button>
+          <span class="rate-lbl">How'd it go?</span>
+          <button class="rbtn nailed"    onclick="rate('nailed')">Nailed it</button>
+          <button class="rbtn ok"        onclick="rate('ok')">Needs work</button>
+          <button class="rbtn struggled" onclick="rate('struggled')">Struggled</button>
+          <button class="rbtn skip"      onclick="rate('skip')">Skip</button>
         </div>
-        <div class="nav-row">
-          <button class="m-nav-btn" id="prevBtn" onclick="prevQ()">← Prev</button>
-          <span class="q-ctr" id="mCtr"></span>
-          <button class="m-nav-btn primary" id="nextBtn" onclick="nextQ()">Next →</button>
+        <div class="mnav-row">
+          <button class="mnav-btn" id="prevBtn" onclick="prevQ()">← Prev</button>
+          <span class="mctr" id="mCtr"></span>
+          <button class="mnav-btn primary" id="nextBtn" onclick="nextQ()">Next →</button>
         </div>
       </div>
     </div>
-    <div id="resultsView">
-      <div class="res-trophy">🏆</div>
+    <div id="rview">
+      <div class="rtrophy">🏆</div>
       <h2 id="rTitle"></h2>
-      <div class="sub" id="rSub"></div>
-      <div class="res-bars">
-        <div class="res-row"><span class="res-label">Nailed it</span><div class="res-bg"><div class="res-fill" id="rf-nailed" style="background:#22c55e;width:0%"></div></div><span class="res-n" id="rn-nailed">0</span></div>
-        <div class="res-row"><span class="res-label">Needs work</span><div class="res-bg"><div class="res-fill" id="rf-ok" style="background:#f59e0b;width:0%"></div></div><span class="res-n" id="rn-ok">0</span></div>
-        <div class="res-row"><span class="res-label">Struggled</span><div class="res-bg"><div class="res-fill" id="rf-struggled" style="background:#ef4444;width:0%"></div></div><span class="res-n" id="rn-struggled">0</span></div>
-        <div class="res-row"><span class="res-label">Skipped</span><div class="res-bg"><div class="res-fill" id="rf-skip" style="background:#6b7280;width:0%"></div></div><span class="res-n" id="rn-skip">0</span></div>
+      <div class="rsub" id="rSub"></div>
+      <div class="rbars">
+        <div class="rbar-row"><span class="rbar-label">Nailed it</span><div class="rbar-bg"><div class="rbar-fill" id="rfN" style="background:#4ade80;width:0%"></div></div><span class="rbar-n" id="rnN">0</span></div>
+        <div class="rbar-row"><span class="rbar-label">Needs work</span><div class="rbar-bg"><div class="rbar-fill" id="rfO" style="background:#fbbf24;width:0%"></div></div><span class="rbar-n" id="rnO">0</span></div>
+        <div class="rbar-row"><span class="rbar-label">Struggled</span><div class="rbar-bg"><div class="rbar-fill" id="rfS" style="background:#f87171;width:0%"></div></div><span class="rbar-n" id="rnS">0</span></div>
+        <div class="rbar-row"><span class="rbar-label">Skipped</span><div class="rbar-bg"><div class="rbar-fill" id="rfK" style="background:#6b7280;width:0%"></div></div><span class="rbar-n" id="rnK">0</span></div>
       </div>
-      <div class="res-actions">
-        <button class="res-retry" onclick="retryRound()">Retry Round</button>
-        <button class="res-exit" onclick="closePractice()">Back to Guide</button>
+      <div class="ract-row">
+        <button class="r-retry" onclick="retryRound()">Retry Round</button>
+        <button class="r-exit"  onclick="closePractice()">Back to Guide</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- PAGE -->
-<div class="page">
+<!-- ── PAGE CONTENT ────────────────────────────────────── -->
 
-  <!-- PRACTICE -->
-  <section id="practice">
-    <div class="section-head reveal">
-      <div class="section-eyebrow">Start Here</div>
-      <h2>Practice Round by Round</h2>
-      <p>Simulate each round of your Amazon loop. Timer runs, one question at a time, you rate yourself and reveal frameworks.</p>
+<!-- PRACTICE -->
+<section class="section" id="practice">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Start Here</div>
+      <h2 class="section-title">Practice Round by Round</h2>
+      <p class="section-sub">Simulate each round of your Amazon interview loop. Timer runs, one question at a time — rate yourself, reveal hints, track progress.</p>
     </div>
     <div class="round-grid" id="roundGrid"></div>
-  </section>
+  </div>
+</section>
 
-  <!-- LPs -->
-  <section id="lps">
-    <div class="section-head reveal">
-      <div class="section-eyebrow">Foundation</div>
-      <h2>All 16 Leadership Principles</h2>
-      <p>Every Amazon interview question maps to an LP. Prepare a STAR story for each — check them off as you go.</p>
+<div class="divline"></div>
+
+<!-- LEADERSHIP PRINCIPLES -->
+<section class="section" id="lps">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Foundation</div>
+      <h2 class="section-title">All 16 Leadership Principles</h2>
+      <p class="section-sub">Every Amazon interview question maps to an LP. Prepare a STAR story for each and check them off as you go.</p>
     </div>
     <div class="lp-grid" id="lpGrid"></div>
-  </section>
+  </div>
+</section>
 
-  <!-- BEHAVIORAL -->
-  <section id="behavioral">
-    <div class="section-head reveal">
-      <div class="section-eyebrow">Behavioral</div>
-      <h2>STAR Method Questions</h2>
-      <p>Use "I" not "we". Quantify every result. Expect follow-up probes — interviewers will dig in on every point.</p>
+<div class="divline"></div>
+
+<!-- BEHAVIORAL -->
+<section class="section" id="behavioral">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Behavioral</div>
+      <h2 class="section-title">STAR Method Questions</h2>
+      <p class="section-sub">Use "I" not "we". Quantify every result. Expect follow-up probes — interviewers dig into every point.</p>
     </div>
-    <div class="callout"><strong>STAR:</strong> <strong>S</strong>ituation → <strong>T</strong>ask (your specific role) → <strong>A</strong>ction (what YOU did) → <strong>R</strong>esult (quantified outcome + learning)</div>
+    <div class="callout">
+      <strong>STAR:</strong> <strong>S</strong>ituation → <strong>T</strong>ask (your specific role) → <strong>A</strong>ction (what YOU did, step by step) → <strong>R</strong>esult (quantified outcome + what you learned)
+    </div>
     <div class="qa-stack" id="behavioralList"></div>
-  </section>
+  </div>
+</section>
 
-  <!-- SYSTEM DESIGN -->
-  <section id="sysdesign">
-    <div class="section-head reveal">
-      <div class="section-eyebrow">Technical</div>
-      <h2>System Design</h2>
-      <p>You won't write code, but you'll lead the design conversation. Know trade-offs, failure modes, and AWS services at Amazon scale.</p>
+<div class="divline"></div>
+
+<!-- SYSTEM DESIGN -->
+<section class="section" id="design">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Technical</div>
+      <h2 class="section-title">System Design</h2>
+      <p class="section-sub">You won't write code, but you'll lead the design conversation. Know trade-offs, failure modes, and AWS services at Amazon scale.</p>
     </div>
-    <div class="callout"><strong>TPM Design Framework:</strong>
+    <div class="callout">
+      <strong>TPM Design Framework:</strong>
       <ul>
         <li>Clarify requirements — functional vs non-functional, scale, latency SLA</li>
         <li>Back-of-envelope estimation — DAU × actions = QPS, storage needs</li>
@@ -624,110 +785,155 @@ section{margin-bottom:96px;scroll-margin-top:76px}
         <li>Failure modes + monitoring: what breaks, how you detect it, COE</li>
       </ul>
     </div>
-    <div class="qa-stack" id="sysdesignList"></div>
-  </section>
+    <div class="qa-stack" id="designList"></div>
+  </div>
+</section>
 
-  <!-- PM -->
-  <section id="pm">
-    <div class="section-head reveal">
-      <div class="section-eyebrow">Program Management</div>
-      <h2>Delivery &amp; Ambiguity</h2>
-      <p>Own delivery from kickoff to launch across teams with no direct authority. Show you can navigate ambiguity at Amazon scale.</p>
+<div class="divline"></div>
+
+<!-- PROGRAM MANAGEMENT -->
+<section class="section" id="pm">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Program Management</div>
+      <h2 class="section-title">Delivery &amp; Ambiguity</h2>
+      <p class="section-sub">Own delivery from kickoff to launch across teams with no direct authority. Show you can navigate ambiguity at Amazon scale.</p>
     </div>
-    <div class="callout"><strong>Working Backwards:</strong> Press Release → FAQ → Visuals → 6-pager narrative. Start with the customer outcome, work back to the engineering plan.</div>
+    <div class="callout">
+      <strong>Working Backwards:</strong> Press Release → FAQ → Visuals → 6-pager narrative. Start with the customer outcome, work back to the engineering plan — not the other way around.
+    </div>
     <div class="qa-stack" id="pmList"></div>
-  </section>
+  </div>
+</section>
 
-  <!-- PRODUCT SENSE -->
-  <section id="product">
-    <div class="section-head reveal">
-      <div class="section-eyebrow">Product Sense</div>
-      <h2>Customer Obsession in Practice</h2>
-      <p>Always start with the customer. Use CIRCLES for design questions. Tie every answer back to Customer Obsession.</p>
-    </div>
-    <div class="callout"><strong>CIRCLES:</strong> Comprehend → Identify the customer → Report needs → Cut to priority → List solutions → Evaluate trade-offs → Summarize recommendation</div>
-    <div class="qa-stack" id="productList"></div>
-  </section>
+<div class="divline"></div>
 
-  <!-- CHECKLIST -->
-  <section id="checklist">
-    <div class="section-head reveal">
-      <div class="section-eyebrow">Track Progress</div>
-      <h2>Readiness Checklist</h2>
-      <p>Mark off each item as you prepare. Progress bar updates in real time.</p>
+<!-- CHECKLIST -->
+<section class="section" id="checklist">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Track Progress</div>
+      <h2 class="section-title">Readiness Checklist</h2>
+      <p class="section-sub">Mark off each item as you prepare. The progress bar updates in real time.</p>
     </div>
-    <div class="prog-track">
-      <label>Overall progress</label>
-      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
-      <span class="prog-count" id="progCount">0 / 0</span>
+    <div class="prog-bar-wrap">
+      <span class="prog-label">Overall progress</span>
+      <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+      <span class="prog-num" id="progNum">0 / 0</span>
     </div>
-    <div id="checklistWrap"></div>
-  </section>
+    <div class="cl-grid" id="clGrid"></div>
+  </div>
+</section>
 
-  <!-- RESOURCES -->
-  <section id="resources">
-    <div class="section-head reveal">
-      <div class="section-eyebrow">Further Study</div>
-      <h2>Key Resources</h2>
-      <p>The most useful links — no filler.</p>
+<div class="divline"></div>
+
+<!-- RESOURCES -->
+<section class="section" id="resources">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Further Study</div>
+      <h2 class="section-title">Key Resources</h2>
+      <p class="section-sub">The most useful links — no filler.</p>
     </div>
     <div class="res-grid" id="resGrid"></div>
-  </section>
+  </div>
+</section>
 
-</div><!-- end .page -->
+<footer>
+  <p>© 2026 Amazon TPM Prep &nbsp;·&nbsp; Based on <a href="https://github.com/keianasnell/pm-interview-prep" target="_blank">Keiana Snell's PM Guide</a></p>
+  <div class="footer-links">
+    <a href="#practice">Practice</a>
+    <a href="#lps">LPs</a>
+    <a href="#checklist">Checklist</a>
+    <a href="https://www.amazon.jobs/content/en/our-workplace/leadership-principles" target="_blank">Amazon LPs ↗</a>
+  </div>
+</footer>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
+/* ── STAR CANVAS ─────────────────────────────────────── */
+(function(){
+  const c=document.getElementById('starCanvas');
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=window.innerWidth; c.height=window.innerHeight; draw(); }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    const count=Math.floor((c.width*c.height)/6000);
+    for(let i=0;i<count;i++){
+      const x=Math.random()*c.width, y=Math.random()*c.height;
+      const r=Math.random()*1.2;
+      const a=Math.random()*0.7+0.1;
+      ctx.beginPath();
+      ctx.arc(x,y,r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${a})`;
+      ctx.fill();
+    }
+  }
+  window.addEventListener('resize',resize);
+  resize();
+})();
 
+/* ── DATA ────────────────────────────────────────────── */
 const ROUNDS=[
-  {id:'r1',color:'r1',icon:'📞',name:'Phone Screen',meta:'30 min · Recruiter / Hiring Manager',dur:30,desc:'Warm-up behavioral + one estimation or technical question. Goal: clear the bar for the onsite loop.',qs:[
-    {q:'Tell me about yourself and why you want to be a TPM at Amazon.',lp:'Customer Obsession, Earn Trust',diff:'core',hint:`<p><strong>60-second structure:</strong></p><ul><li>Where you are now + your technical background in one sentence</li><li>Through-line: how your experience connects to program management at scale</li><li>Why Amazon — tie to a concrete LP or initiative, not "great company"</li></ul><div class="hint-eg">"I'm a TPM at [Company] where I've delivered X across N teams. My engineering background means I understand the technical trade-offs my teams face. I'm here because Amazon's Working Backwards process is exactly the discipline I want to build on at scale."</div>`},
-    {q:'Why do you want to leave your current role?',lp:'Earn Trust',diff:'core',hint:`<ul><li>Be forward-looking — never badmouth your employer</li><li>Frame around scale or scope you want to take on</li><li>Connect explicitly to what Amazon offers that your current role doesn't</li></ul>`},
-    {q:'Estimate how many packages Amazon ships on a typical day.',lp:'Dive Deep, Are Right A Lot',diff:'medium',hint:`<p><strong>Think aloud — your chain matters more than the number:</strong></p><ul><li>US households: ~130M. Prime membership ~65M households (~50%)</li><li>Average Prime orders/month: ~3 → ~6M orders/day in the US</li><li>Non-Prime adds ~20% → ~7.2M US/day; International ~equal → ~14M/day globally</li><li>Sanity check: Amazon ships ~5B packages/year = ~14M/day</li><li>Peak (Prime Day): 3–4× = ~40–50M/day</li></ul>`},
+  {id:'r1',cls:'rc-1',icon:'📞',name:'Phone Screen',meta:'30 min · Recruiter',dur:30,
+   desc:'Warm-up behavioral + one estimation question. Goal: clear the bar for the onsite loop.',
+   qs:[
+    {q:'Tell me about yourself and why you want to be a TPM at Amazon.',lp:'Customer Obsession',diff:'core',hint:`<p><strong>60-second structure:</strong></p><ul><li>Where you are now + technical background in one sentence</li><li>Through-line: how your experience maps to program management at scale</li><li>Why Amazon — tie to a concrete LP, not "great company"</li></ul><div class="hint-eg">"I'm a TPM at [Co] where I've delivered X across N teams. My engineering background means I understand the trade-offs my teams face daily. I'm here because Amazon's Working Backwards process is exactly the discipline I want to operate at scale."</div>`},
+    {q:'Why do you want to leave your current role?',lp:'Earn Trust',diff:'core',hint:`<ul><li>Be forward-looking — never badmouth your employer</li><li>Frame around scale or scope you want to take on</li><li>Connect to what Amazon offers that your current role doesn't</li></ul>`},
+    {q:'Estimate how many packages Amazon ships on a typical day.',lp:'Dive Deep',diff:'medium',hint:`<p><strong>Chain your assumptions aloud — the reasoning matters more than the number:</strong></p><ul><li>US households ~130M; Prime ~65M (~50%)</li><li>Average Prime orders/month ~3 → ~6M orders/day US</li><li>Non-Prime adds ~20% → ~7.2M US/day; International ~equal → ~14M/day globally</li><li>Sanity check: Amazon ships ~5B packages/year ÷ 365 = ~14M/day ✓</li><li>Peak (Prime Day): 3–4× = ~40–50M/day</li></ul>`},
     {q:'What does a TPM do that an engineering manager doesn\'t?',lp:'Ownership',diff:'core',hint:`<ul><li>EM: owns people, career growth, team health, technical quality <em>within</em> one team</li><li>TPM: owns delivery <em>across</em> teams — no direct reports, drives through influence</li><li>TPM defines "what and when" cross-functionally; EM defines "how" within their team</li><li>TPMs own program-level risk, dependencies, and stakeholder communication</li></ul>`}
   ]},
-  {id:'r2',color:'r2',icon:'🔥',name:'Bar Raiser',meta:'60 min · Independent evaluator — holds veto power',dur:60,desc:'Not on your hiring team. They ask: would this person raise the bar at Amazon? Deep follow-up on every answer.',qs:[
-    {q:'Tell me about a time you disagreed with your manager or senior leadership. What happened?',lp:'Have Backbone; Disagree and Commit',diff:'hard',hint:`<p><strong>Both halves matter equally:</strong></p><ul><li>You raised the concern with data, not emotion — document this</li><li>You escalated through proper channels</li><li>You FULLY committed once the decision was made — no passive resistance</li></ul><p><strong>Prepare for follow-ups:</strong></p><ul><li>"What would you have done if they still didn't listen?"</li><li>"Looking back, were you right?"</li><li>"How did your relationship change afterward?"</li></ul>`},
-    {q:'Tell me about the most complex program you\'ve ever managed. What made it hard?',lp:'Deliver Results, Dive Deep',diff:'hard',hint:`<p><strong>Complexity signals they look for:</strong></p><ul><li>Number of teams, dependencies, and geographies</li><li>Technical ambiguity (unknown unknowns)</li><li>Competing stakeholder priorities under time pressure</li><li>Scale — users affected, revenue at risk</li></ul><p>Structure: What was the program? → What made it uniquely hard? → YOUR specific contribution? → Outcome in numbers?</p>`},
-    {q:'Describe a time you failed. What did you learn?',lp:'Earn Trust, Learn and Be Curious',diff:'hard',hint:`<p><strong>Amazon trap:</strong> Don't pick a "fake failure" that was secretly a success. Pick something real that hurt.</p><ul><li>Own it completely — no deflecting to external factors</li><li>Show the scale of impact (what did customers or the business lose?)</li><li>Be specific about what you changed in your behavior afterward</li><li>Show you'd catch this earlier today — what system did you build?</li></ul>`},
-    {q:'Tell me about a time you raised the bar for your team.',lp:'Insist on the Highest Standards',diff:'hard',hint:`<ul><li>Show a before/after — what did "good" look like before?</li><li>What resistance did you face? (raising the bar always meets friction)</li><li>How did you sustain the higher standard — process, tooling, culture?</li><li>Measurable outcome?</li></ul><div class="hint-eg">"Before I joined, the team shipped without ORRs. I introduced a mandatory pre-launch review, trained 3 teams on it, and tied it to launch approval. We had zero SEV-2+ incidents on launch days in the 6 months after vs. 4 in the prior 6 months."</div>`},
-    {q:'If you could change one thing about how you\'ve led programs, what would it be?',lp:'Earn Trust, Learn and Be Curious',diff:'hard',hint:`<ul><li>Be genuinely self-critical — the Bar Raiser will probe vague answers</li><li>Connect the weakness to a specific past situation where it cost you</li><li>Show what you've already changed or are actively working on</li><li>Don't pick a strength in disguise</li></ul>`}
+  {id:'r2',cls:'rc-2',icon:'🔥',name:'Bar Raiser',meta:'60 min · Independent evaluator',dur:60,
+   desc:'Not on your hiring team. They ask: would this person raise the bar? Expect deep follow-up on every answer.',
+   qs:[
+    {q:'Tell me about a time you disagreed with your manager or senior leadership. What happened?',lp:'Have Backbone; Disagree and Commit',diff:'hard',hint:`<p><strong>Both halves matter equally:</strong></p><ul><li>You raised the concern with data, not emotion</li><li>You escalated through proper channels</li><li>You FULLY committed once the decision was made</li></ul><p><strong>Prepare for follow-ups:</strong> "What would you have done if they still didn't listen?" / "Were you right in hindsight?"</p>`},
+    {q:'Tell me about the most complex program you\'ve ever managed. What made it hard?',lp:'Deliver Results, Dive Deep',diff:'hard',hint:`<p><strong>Complexity signals they look for:</strong> number of teams/geographies, technical ambiguity, competing stakeholder priorities, scale (users affected, revenue at risk).</p><p>Structure: What was the program? → What made it uniquely hard? → YOUR specific contribution? → Outcome in numbers?</p>`},
+    {q:'Describe a time you failed. What did you learn?',lp:'Earn Trust, Learn and Be Curious',diff:'hard',hint:`<p><strong>Amazon trap:</strong> Don't pick a fake failure that was secretly a success. Pick something real that hurt.</p><ul><li>Own it completely — no deflecting to external factors</li><li>Show scale of impact (what did customers or the business lose?)</li><li>Specific change in your behavior afterward</li><li>What system did you build to catch this earlier next time?</li></ul>`},
+    {q:'Tell me about a time you raised the bar for your team.',lp:'Insist on the Highest Standards',diff:'hard',hint:`<ul><li>Show a before/after — what did "good" look like before?</li><li>What resistance did you face? Raising the bar always meets friction.</li><li>How did you sustain the higher standard — process, tooling, culture?</li><li>Measurable outcome?</li></ul><div class="hint-eg">"Before I joined, the team shipped without ORRs. I introduced a mandatory pre-launch review, trained 3 teams, tied it to launch approval. Zero SEV-2+ incidents on launch days in 6 months after, vs. 4 in the prior 6 months."</div>`},
+    {q:'If you could change one thing about how you\'ve led programs, what would it be?',lp:'Earn Trust, Learn and Be Curious',diff:'hard',hint:`<ul><li>Be genuinely self-critical — Bar Raiser will probe vague answers</li><li>Connect the weakness to a specific situation where it cost you</li><li>Show what you've already changed or are actively working on</li><li>Don't pick a strength in disguise</li></ul>`}
   ]},
-  {id:'r3',color:'r3',icon:'🏗️',name:'System Design',meta:'60 min · Senior Engineer or Principal TPM',dur:60,desc:'Lead a design discussion. Show you understand architecture, trade-offs, and failure modes at Amazon scale.',qs:[
-    {q:'Design Amazon\'s package tracking system — from order placed to delivery confirmation.',lp:'Dive Deep, Think Big',diff:'hard',hint:`<ul><li><strong>Events (state machine):</strong> order placed → warehouse picked → shipped → in transit (GPS) → delivered</li><li><strong>Data model:</strong> packageId, orderId, userId, status, timestamps, location history</li><li><strong>Real-time updates:</strong> IoT/GPS → Kinesis → Lambda → DynamoDB → SNS push to app</li><li><strong>Scale:</strong> 14M packages/day = ~160/sec; peak ~5× = ~800/sec</li><li><strong>Key trade-offs:</strong> eventual consistency on location is fine; status transitions must be strongly consistent (idempotent writes)</li><li><strong>Failure modes:</strong> GPS gap (last known position), duplicate events (idempotency key), notification failures (DLQ + retry)</li></ul>`},
-    {q:'How would you design a rate limiter for Amazon\'s public API?',lp:'Dive Deep, Frugality',diff:'medium',hint:`<p><strong>Algorithms:</strong> Token bucket (allows bursts) vs Sliding window (precise). Token bucket is the typical default.</p><ul><li>Redis cluster as shared counter store (INCR + TTL per key)</li><li>Key = apiKey + windowStart → reject with 429 + Retry-After header</li><li>Local token buckets + async sync to Redis for ultra-high throughput</li></ul><p><strong>Trade-off:</strong> local cache is faster but can allow brief bursts above limit; Redis is accurate but adds ~1ms latency</p>`},
-    {q:'You\'re the TPM for a service experiencing 5× normal traffic. Walk me through your response.',lp:'Bias for Action, Ownership',diff:'medium',hint:`<p><strong>This is incident management, not just system design:</strong></p><ul><li><strong>0–5 min:</strong> Declare SEV, page on-call, check if expected (marketing event?) vs unexpected</li><li><strong>5–30 min:</strong> Auto-scaling triggered? If not, manual scale-out. Enable request throttling for non-critical paths. Check DB connection pools.</li><li><strong>Communicate:</strong> Stakeholder update every 15 min. Set expectations on timeline.</li><li><strong>Post-incident:</strong> COE within 5 days. Was this preventable? What alarm was missing?</li></ul>`},
-    {q:'What happens when a customer clicks "Buy Now" on Amazon.com?',lp:'Dive Deep, Customer Obsession',diff:'hard',hint:`<ul><li>Browser → CloudFront → ALB → Order Service (validates cart, pricing, inventory)</li><li>Payment Service (tokenized card → payment gateway → authorization)</li><li>Inventory Service (reserve item — optimistic locking)</li><li>Order DB write → OrderPlaced event → SQS → Fulfillment Service</li><li>Fulfillment → picks warehouse → creates shipment → Notification Service → email + push</li><li>Key concerns: idempotency (no double charge), inventory race conditions, payment rollback on fulfillment failure</li></ul>`}
+  {id:'r3',cls:'rc-3',icon:'🏗️',name:'System Design',meta:'60 min · Senior Engineer',dur:60,
+   desc:'Lead a technical design discussion. Show you understand architecture, trade-offs, and failure modes at Amazon scale.',
+   qs:[
+    {q:'Design Amazon\'s package tracking system — from order placed to delivery confirmation.',lp:'Dive Deep, Think Big',diff:'hard',hint:`<ul><li><strong>State machine:</strong> order placed → picked → shipped → in transit (GPS) → delivered</li><li><strong>Data model:</strong> packageId, orderId, userId, status, timestamps, location history</li><li><strong>Real-time:</strong> IoT/GPS → Kinesis → Lambda → DynamoDB → SNS push to app</li><li><strong>Scale:</strong> 14M/day = ~160/sec; peak 5× = ~800/sec</li><li><strong>Trade-offs:</strong> eventual consistency on location fine; status transitions must be strongly consistent</li><li><strong>Failures:</strong> GPS gap (last known), duplicate events (idempotency key), notification failures (DLQ)</li></ul>`},
+    {q:'How would you design a rate limiter for Amazon\'s public API?',lp:'Dive Deep, Frugality',diff:'medium',hint:`<p><strong>Algorithms:</strong> Token bucket (allows bursts, good default) vs. Sliding window (precise, more memory)</p><ul><li>Redis cluster as shared counter: INCR + TTL per key</li><li>Key = apiKey + windowStart → reject with 429 + Retry-After header</li><li>Local buckets + async sync to Redis for ultra-high throughput</li><li>Trade-off: local cache is faster but can allow brief bursts above limit</li></ul>`},
+    {q:'You\'re the TPM for a service experiencing 5× normal traffic. Walk me through your response.',lp:'Bias for Action, Ownership',diff:'medium',hint:`<p><strong>This is incident management, not just system design:</strong></p><ul><li><strong>0–5 min:</strong> Declare SEV, page on-call, check if expected vs. unexpected</li><li><strong>5–30 min:</strong> Auto-scaling triggered? If not, manual scale-out. Throttle non-critical paths. Check DB connection pools.</li><li><strong>Communicate:</strong> Stakeholder update every 15 min.</li><li><strong>Post-incident:</strong> COE within 5 days. Was this preventable? What alarm was missing?</li></ul>`},
+    {q:'What happens when a customer clicks "Buy Now" on Amazon.com?',lp:'Dive Deep, Customer Obsession',diff:'hard',hint:`<ul><li>Browser → CloudFront → ALB → Order Service (validates cart, pricing, inventory)</li><li>Payment Service (tokenized card → payment gateway → authorization)</li><li>Inventory Service (reserve item — optimistic locking)</li><li>Order DB write → OrderPlaced event → SQS → Fulfillment Service</li><li>Notification Service → email + push confirmation</li><li>Key concerns: idempotency (no double charge), inventory race conditions, payment rollback</li></ul>`}
   ]},
-  {id:'r4',color:'r4',icon:'📋',name:'Program Management',meta:'45 min · Senior TPM or Director',dur:45,desc:'Delivery, ambiguity, cross-team coordination, risk, and metrics. Drive programs from kickoff to launch.',qs:[
-    {q:'You\'ve just been assigned a program 3 months behind with no clear owner. What do you do first?',lp:'Ownership, Bias for Action',diff:'hard',hint:`<p><strong>Week 1 — Diagnose before prescribing:</strong></p><ul><li>Read all existing docs and tickets — don't start by holding meetings</li><li>1:1 with each team lead: what do THEY think the blocker is?</li><li>Build a dependency map — what's actually blocking what?</li></ul><p><strong>Week 2 — Declare:</strong></p><ul><li>One-page situation assessment: current state, root causes, proposed path</li><li>Present to leadership: real date + the trade-off to hit the original date</li></ul>`},
-    {q:'Two engineering teams are in conflict over the technical approach. The program is blocked. What do you do?',lp:'Earn Trust, Have Backbone',diff:'hard',hint:`<ul><li>Understand both positions in separate 1:1s — don't assume, don't triangulate</li><li>Identify if it's technical (resolve with data/prototype) or ownership/priority (needs stakeholder alignment)</li><li>Bring both teams together with structured agenda: each presents approach + trade-offs</li><li>If still stuck: escalate with written recommendation to engineering VP — don't let it sit</li><li>Document the decision and rationale regardless of outcome</li></ul>`},
-    {q:'What metrics do you track in the first 30/60/90 days after launching a new feature?',lp:'Customer Obsession, Deliver Results',diff:'medium',hint:`<p><strong>Day 1–7 (Stability):</strong> Error rate, latency p50/p99, availability, on-call page volume</p><p><strong>Day 7–30 (Adoption):</strong> Discovery rate, activation rate, session depth, support ticket volume</p><p><strong>Day 30–60 (Engagement):</strong> D7/D30 retention, task completion rate, CSAT delta</p><p><strong>Day 60–90 (Business Impact):</strong> Revenue attributable to feature, cost delta, impact on adjacent metrics</p><div class="hint-eg">Define guardrail metrics upfront: "We halt rollout if returns rate increases by >2% or cart abandonment by >1%."</div>`},
-    {q:'How do you manage a program when you have no authority over any of the people doing the work?',lp:'Ownership, Earn Trust',diff:'hard',hint:`<ul><li><strong>Shared accountability:</strong> Make every team's work visible to leadership — weekly written status up the chain</li><li><strong>Align on goals, not tasks:</strong> Tie work to a shared customer outcome, not a Gantt chart</li><li><strong>Earn credibility:</strong> Do the work others won't — write the PRD, own the cross-team doc, remove blockers proactively</li><li><strong>Escalate wisely:</strong> Always escalate with data and a proposed solution, never just a complaint</li></ul>`}
+  {id:'r4',cls:'rc-4',icon:'📋',name:'Program Management',meta:'45 min · Director',dur:45,
+   desc:'Delivery, ambiguity, cross-team coordination, risk, and metrics. Show you can drive programs from kickoff to launch.',
+   qs:[
+    {q:'You\'ve just been assigned a program 3 months behind with no clear owner. What do you do first?',lp:'Ownership, Bias for Action',diff:'hard',hint:`<p><strong>Week 1 — Diagnose before prescribing:</strong></p><ul><li>Read all existing docs and tickets — don't start by holding meetings</li><li>1:1 with each team lead: what do THEY think the blocker is?</li><li>Build a dependency map — what's actually blocking what?</li></ul><p><strong>Week 2 — Declare:</strong> One-page assessment: current state, root causes, proposed path. Present to leadership with real date + trade-off to hit original date.</p>`},
+    {q:'Two engineering teams are in conflict over the technical approach. The program is blocked. What do you do?',lp:'Earn Trust, Have Backbone',diff:'hard',hint:`<ul><li>Understand both positions in separate 1:1s — don't assume, don't triangulate</li><li>Technical disagreement → resolve with data/prototype. Ownership conflict → needs stakeholder alignment.</li><li>Structured meeting: each team presents approach + trade-offs</li><li>If still stuck: escalate with written recommendation — don't let it sit</li><li>Document the decision and rationale regardless of outcome</li></ul>`},
+    {q:'What metrics do you track in the first 30/60/90 days after a feature launch?',lp:'Customer Obsession, Deliver Results',diff:'medium',hint:`<p><strong>Day 1–7 (Stability):</strong> Error rate, latency p50/p99, availability, on-call volume</p><p><strong>Day 7–30 (Adoption):</strong> Discovery rate, activation, session depth, support tickets</p><p><strong>Day 30–60 (Engagement):</strong> D7/D30 retention, task completion, CSAT delta</p><p><strong>Day 60–90 (Business Impact):</strong> Revenue attributable, cost delta, impact on adjacent metrics</p><div class="hint-eg">Define guardrail metrics upfront: "We halt rollout if returns rate increases >2% or cart abandonment >1%."</div>`},
+    {q:'How do you manage a program when you have no authority over any of the people doing the work?',lp:'Ownership, Earn Trust',diff:'hard',hint:`<ul><li><strong>Shared accountability:</strong> Make every team's work visible to leadership — weekly written status up the chain</li><li><strong>Align on goals, not tasks:</strong> Tie work to a shared customer outcome</li><li><strong>Earn credibility:</strong> Do the work others won't — write the PRD, own the cross-team doc, remove blockers proactively</li><li><strong>Escalate wisely:</strong> Always bring data and a proposed solution, never just a complaint</li></ul>`}
   ]},
-  {id:'r5',color:'r5',icon:'💡',name:'Product Sense',meta:'45 min · Product Manager or VP',dur:45,desc:'Customer obsession, product strategy, prioritization, and metrics. Always start with the customer.',qs:[
-    {q:'Pick an Amazon product you use. What would you improve and why?',lp:'Customer Obsession, Invent and Simplify',diff:'core',hint:`<p><strong>CIRCLES method:</strong></p><ul><li>State your product and why you chose it</li><li>Identify a specific user segment — not "all users"</li><li>State the pain point with evidence or reasoning</li><li>Propose 2–3 improvements; pick the best and defend it with trade-offs</li><li>Define success metrics for your chosen improvement</li></ul><div class="hint-eg">"For elderly users living alone, the biggest pain is re-ordering medications. I'd add a confirmation step for Alexa purchases over $20 and notify a family member. Metric: re-order rate for Prime members 65+ and return rate on Alexa-placed orders."</div>`},
-    {q:'Amazon\'s mobile app conversion rate dropped 15% this week. Diagnose it.',lp:'Dive Deep, Are Right A Lot',diff:'hard',hint:`<p><strong>Step 1 — Segment:</strong> All users or one segment? Both platforms or one? All categories or specific ones?</p><p><strong>Step 2 — Timeline:</strong> Sudden (code deployment, A/B test?) or gradual (seasonal, competitor)?</p><p><strong>Step 3 — Funnel:</strong> Homepage → PDP → Cart → Checkout → Payment — where exactly does it drop?</p><p><strong>Step 4 — External:</strong> Competitors also affected? Economic event?</p><p><strong>Step 5:</strong> Top 3 hypotheses → rank by likelihood → propose a test for each</p>`},
-    {q:'Design a new Amazon Prime feature specifically for college students.',lp:'Customer Obsession, Think Big',diff:'medium',hint:`<p><strong>Clarify first:</strong> Growing Prime adoption among students, or adding value for existing student members?</p><p><strong>User frame:</strong></p><ul><li>Pain: cost-sensitive, shared housing, textbooks, irregular schedules</li><li>Behavior: bulk buying for dorms, splitting orders with roommates, heavy streaming</li></ul><p>Feature ideas: group orders (split delivery/cost), textbook rentals, campus delivery hours, meal-kit trials</p><p>Pick one → define MVP scope, success metrics, risk, phased rollout</p>`},
-    {q:'How would you prioritize a backlog of 20 features when you can only ship 3 this quarter?',lp:'Customer Obsession, Deliver Results',diff:'medium',hint:`<ul><li><strong>Filter:</strong> Remove anything not customer-facing or not advancing a strategic goal</li><li><strong>Score with RICE:</strong> Reach × Impact × Confidence ÷ Effort</li><li><strong>Constraints:</strong> External deadlines, dependencies for future quarters, highest learning value</li><li><strong>Validate:</strong> Present ranked list with scoring rationale — don't decide in a vacuum</li><li><strong>Out-of-scope list:</strong> Write explicitly what you're NOT doing. This prevents scope creep.</li></ul>`}
+  {id:'r5',cls:'rc-5',icon:'💡',name:'Product Sense',meta:'45 min · VP of Product',dur:45,
+   desc:'Customer obsession, product strategy, prioritization, and metrics. Always start with the customer and work backwards.',
+   qs:[
+    {q:'Pick an Amazon product you use. What would you improve and why?',lp:'Customer Obsession',diff:'core',hint:`<p><strong>CIRCLES method:</strong> Comprehend → Identify customer → Report needs → Cut to priority → List solutions → Evaluate trade-offs → Summarize</p><ul><li>Identify a specific user segment — not "all users"</li><li>Propose 2–3 improvements; pick the best and defend it with trade-offs</li><li>Define success metrics</li></ul><div class="hint-eg">"For elderly users living alone, the pain is re-ordering medications. I'd add a confirmation step for Alexa purchases over $20 and notify a family member. Metric: re-order rate for Prime members 65+ and return rate on Alexa-placed orders."</div>`},
+    {q:'Amazon\'s mobile app conversion rate dropped 15% this week. Diagnose it.',lp:'Dive Deep, Are Right A Lot',diff:'hard',hint:`<p><strong>Step 1 — Segment:</strong> All users or one segment? Both platforms or one? All categories or specific ones?</p><p><strong>Step 2 — Timeline:</strong> Sudden (code deployment, A/B test?) or gradual (seasonal)?</p><p><strong>Step 3 — Funnel:</strong> Homepage → PDP → Cart → Checkout → Payment — where exactly?</p><p><strong>Step 4 — External:</strong> Competitors also affected?</p><p><strong>Step 5:</strong> Top 3 hypotheses → rank by likelihood → propose a test for each</p>`},
+    {q:'Design a new Amazon Prime feature specifically for college students.',lp:'Customer Obsession, Think Big',diff:'medium',hint:`<p><strong>Clarify first:</strong> Growing adoption, or adding value for existing members?</p><p>User pain: cost-sensitive, shared housing, textbooks, bulk dorm buying, heavy streaming.</p><p>Ideas: group orders (split cost), textbook rentals, campus delivery hours.</p><p>Pick one → MVP scope, success metrics, risk (cannibalization?), phased rollout.</p>`},
+    {q:'How would you prioritize a backlog of 20 features when you can only ship 3 this quarter?',lp:'Customer Obsession, Deliver Results',diff:'medium',hint:`<ul><li><strong>Filter:</strong> Remove anything not customer-facing or not advancing a strategic goal</li><li><strong>Score with RICE:</strong> Reach × Impact × Confidence ÷ Effort</li><li><strong>Constraints:</strong> External deadlines, future dependencies, highest learning value</li><li><strong>Validate:</strong> Present ranked list with rationale — don't decide in a vacuum</li><li><strong>Out-of-scope list:</strong> Write explicitly what you're NOT doing. Prevents scope creep.</li></ul>`}
   ]},
-  {id:'r6',color:'r6',icon:'🤝',name:'Leadership',meta:'45 min · Director or Partner Team Lead',dur:45,desc:'Cross-team influence, building trust, developing others. Shows your leadership ceiling at Amazon.',qs:[
-    {q:'Tell me about a time you aligned multiple senior stakeholders with conflicting priorities.',lp:'Earn Trust, Have Backbone',diff:'hard',hint:`<ul><li>Name the stakeholders and their roles — show the real tension</li><li>How did you understand each position? (1:1s, not assumptions)</li><li>What shared customer goal let you reframe the conflict?</li><li>How did you facilitate resolution — meeting, document, escalation?</li><li>What was the outcome and how did the relationship look afterward?</li></ul>`},
-    {q:'Describe how you\'ve helped someone grow into a more senior role.',lp:'Hire and Develop the Best',diff:'medium',hint:`<ul><li>Be specific about the person's starting point and the growth you saw</li><li>What did you actually DO? (stretch projects, candid feedback, sponsoring in meetings)</li><li>What was hard about developing this person?</li><li>What is that person doing today — can you quantify the impact?</li></ul>`},
-    {q:'Tell me about a time you had to earn the trust of a team that was skeptical of you.',lp:'Earn Trust, Ownership',diff:'hard',hint:`<ul><li>Why were they skeptical? (new to domain, perceived as overhead, bad prior TPM experience?)</li><li>First 30 days: listen, don't propose changes, do the work they don't want to do</li><li>What was the specific turning point moment when trust shifted?</li></ul><div class="hint-eg">The turning point is usually when you removed a blocker that had been bothering them for months but was in YOUR lane to fix. Show that moment specifically.</div>`},
-    {q:'How do you operate given a goal but no clear plan, no team, and a 6-month deadline?',lp:'Think Big, Bias for Action, Ownership',diff:'hard',hint:`<p><strong>Month 1 — Frame:</strong></p><ul><li>Write the press release and FAQ before anything else (Working Backwards)</li><li>Define what success looks like in 6 months with specific metrics</li><li>Map the problem space — what must be true for this to work?</li></ul><p><strong>Month 1–2 — Build the team:</strong> Find owners in each org. Get leadership alignment on resources in writing.</p><p><strong>Month 2–5 — Iterate:</strong> Milestone every 3–4 weeks. Fail fast on risky assumptions.</p>`}
+  {id:'r6',cls:'rc-6',icon:'🤝',name:'Leadership',meta:'45 min · Director',dur:45,
+   desc:'Cross-team influence, building trust, developing others, operating at senior levels.',
+   qs:[
+    {q:'Tell me about a time you aligned multiple senior stakeholders with conflicting priorities.',lp:'Earn Trust, Have Backbone',diff:'hard',hint:`<ul><li>Name the stakeholders and their roles — show the real tension</li><li>How did you understand each position? (1:1s, not assumptions)</li><li>What shared customer goal let you reframe the conflict?</li><li>How did you facilitate resolution?</li><li>What was the outcome and how did the relationship look afterward?</li></ul>`},
+    {q:'Describe how you\'ve helped someone grow into a more senior role.',lp:'Hire and Develop the Best',diff:'medium',hint:`<ul><li>Specific about the person's starting point and the growth you saw</li><li>What did you actually DO? (stretch projects, candid feedback, sponsoring in meetings)</li><li>What was hard about developing this person?</li><li>What is that person doing today — can you quantify the impact?</li></ul>`},
+    {q:'Tell me about a time you had to earn the trust of a team that was skeptical of you.',lp:'Earn Trust, Ownership',diff:'hard',hint:`<ul><li>Why were they skeptical? (new domain, perceived as overhead, bad prior TPM?)</li><li>First 30 days: listen, don't propose changes, do the work they don't want to do</li><li>What was the specific turning point when trust shifted?</li></ul><div class="hint-eg">The turning point is usually when you removed a blocker that had been bothering them for months but was in YOUR lane to fix. Show that moment specifically.</div>`},
+    {q:'How do you operate given a goal but no clear plan, no team, and a 6-month deadline?',lp:'Think Big, Bias for Action, Ownership',diff:'hard',hint:`<p><strong>Month 1:</strong> Write the PR/FAQ (Working Backwards). Define success with specific metrics. Map the problem space.</p><p><strong>Month 1–2:</strong> Find owners in each org. Get leadership alignment on resources in writing.</p><p><strong>Month 2–5:</strong> Milestone every 3–4 weeks. Fail fast on risky assumptions.</p>`}
   ]}
 ];
 
 const LPS=[
-  {n:1,name:'Customer Obsession',def:'Leaders start with the customer and work backwards. They work vigorously to earn and keep customer trust.',qs:['Tell me about a time you made a decision unpopular internally but right for the customer.','Describe going above and beyond to deliver for a customer.','Tell me about a time customer feedback changed your product direction.']},
+  {n:1,name:'Customer Obsession',def:'Leaders start with the customer and work backwards. They work vigorously to earn and keep customer trust.',qs:['Tell me about a decision unpopular internally but right for the customer.','Describe going above and beyond to deliver for a customer.','Tell me about a time customer feedback changed your product direction.']},
   {n:2,name:'Ownership',def:'Leaders act on behalf of the entire company. They never say "that\'s not my job."',qs:['Tell me about taking ownership of a problem that wasn\'t technically yours.','Describe identifying a risk others had overlooked.','Give an example of going beyond your role to ensure project success.']},
-  {n:3,name:'Invent and Simplify',def:'Leaders expect innovation from their teams and always find ways to simplify.',qs:['Tell me about inventing a novel solution to a complex problem.','Describe a process you simplified with significant impact.','Give an example of challenging the status quo with something new.']},
+  {n:3,name:'Invent and Simplify',def:'Leaders expect innovation from their teams and always find ways to simplify.',qs:['Tell me about inventing a novel solution to a complex problem.','Describe a process you simplified that had significant impact.','Give an example of challenging the status quo with something new.']},
   {n:4,name:'Are Right, A Lot',def:'Leaders have strong judgment and good instincts. They seek diverse perspectives.',qs:['Tell me about making a difficult decision with incomplete data.','Describe a time you overruled expert opinion and were right.','Tell me about a time your judgment was wrong and what you learned.']},
   {n:5,name:'Learn and Be Curious',def:'Leaders are never done learning and always seek to improve themselves.',qs:['Tell me about a technical concept you had to learn quickly for a project.','Describe pursuing knowledge outside your immediate responsibilities.','Tell me about a time new learning changed your approach to work.']},
   {n:6,name:'Hire and Develop the Best',def:'Leaders raise the performance bar with every hire and recognize exceptional talent.',qs:['Tell me about a time you helped someone grow significantly.','Describe how you\'ve raised the bar in hiring.','Give an example of mentoring someone through a difficult challenge.']},
   {n:7,name:'Insist on the Highest Standards',def:'Leaders have relentlessly high standards — many think these are unreasonably high.',qs:['Tell me about rejecting work that didn\'t meet your standards under pressure.','Describe pushing the team to deliver higher quality.','Give an example of a launch you delayed because something wasn\'t right.']},
-  {n:8,name:'Think Big',def:'Thinking small is a self-fulfilling prophecy. Leaders create and communicate a bold direction.',qs:['Tell me about proposing a vision significantly more ambitious than what was planned.','Describe inspiring others to pursue a large-scale goal.','Give an example of thinking big leading to a breakthrough.']},
+  {n:8,name:'Think Big',def:'Thinking small is a self-fulfilling prophecy. Leaders create and communicate a bold direction.',qs:['Tell me about proposing a vision more ambitious than what was planned.','Describe inspiring others to pursue a large-scale goal.','Give an example of thinking big leading to a breakthrough.']},
   {n:9,name:'Bias for Action',def:'Speed matters in business. Many decisions are reversible and don\'t need extensive study.',qs:['Tell me about making a fast decision with limited information that paid off.','Describe breaking through paralysis to move a project forward.','Give an example of when being first mattered and how you ensured it.']},
   {n:10,name:'Frugality',def:'Accomplish more with less. Constraints breed resourcefulness and invention.',qs:['Tell me about delivering a significant result with limited resources.','Describe optimizing cost on a project without sacrificing quality.','Give an example of challenging a budget and finding a better way.']},
   {n:11,name:'Earn Trust',def:'Leaders listen attentively, speak candidly, treat others respectfully. They are vocally self-critical.',qs:['Tell me about earning the trust of a skeptical stakeholder.','Describe delivering difficult feedback to a senior person.','Give an example of admitting a mistake to your team or leadership.']},
@@ -740,28 +946,22 @@ const LPS=[
 
 const BEHAVIORAL=[
   {q:'Tell me about a time you led a cross-functional program with no direct authority.',lp:'Ownership, Deliver Results',a:'Set the context (teams, stakes), explain how you created alignment (shared goals, escalation paths), describe how you unblocked the team, and quantify the outcome.',tip:'Have a story where you influenced engineers, scientists, AND business stakeholders simultaneously. Amazon values influence through credibility and data, not title.'},
-  {q:'Tell me about a time a project was significantly behind schedule. What did you do?',lp:'Deliver Results, Bias for Action',a:'Cover: how you identified the delay, root cause, trade-offs proposed (scope/quality/timeline), how you communicated to leadership, and how it resolved.',tip:'Amazon wants to see you didn\'t hide the problem. Early escalation with a proposed path forward is a strong positive signal.'},
-  {q:'Describe a time you disagreed with your manager or senior leadership on a technical direction.',lp:'Have Backbone; Disagree and Commit',a:'Describe your concern and data, the discussion, and — critically — how you fully committed once the decision was made. Include what happened as a result.',tip:'Bar Raiser favorite. They want both halves: the backbone AND the commit. Showing only one half is a red flag.'},
-  {q:'Tell me about the most ambiguous project you\'ve ever led. How did you bring clarity?',lp:'Think Big, Are Right A Lot',a:'Show how you decomposed the ambiguity: what you knew, what you didn\'t know, how you gathered signal, what framework you used to make the first concrete decision.',tip:'Amazon loves this for TPMs. Show you ran toward the ambiguity, not away from it.'},
-  {q:'Tell me about a time you simplified a complex process or system.',lp:'Invent and Simplify, Frugality',a:'What was the complexity, why it existed, your new approach, what resistance you faced, and the quantified improvement.',tip:'Quantify: "3 systems → 1 system, onboarding time cut from 2 weeks to 2 days" is far more compelling than a general description.'}
+  {q:'Tell me about a time a project was significantly behind schedule. What did you do?',lp:'Deliver Results, Bias for Action',a:'How you identified the delay, root cause found, trade-offs proposed (scope/quality/timeline), how you communicated to leadership, and how it resolved.',tip:'Amazon wants to see you didn\'t hide the problem. Early escalation with a proposed path forward is a strong positive signal.'},
+  {q:'Describe a time you disagreed with your manager or senior leadership on a technical direction.',lp:'Have Backbone; Disagree and Commit',a:'Describe your concern and data, the discussion, and — critically — how you fully committed once the decision was made.',tip:'Bar Raiser favorite. They want both halves: the backbone AND the commit. Showing only one half is a red flag.'},
+  {q:'Tell me about the most ambiguous project you\'ve ever led. How did you bring clarity?',lp:'Think Big, Are Right A Lot',a:'How you decomposed the ambiguity: what you knew, what you didn\'t know, how you gathered signal, what framework you used to make the first concrete decision.',tip:'Amazon loves this for TPMs. Show you ran toward the ambiguity, not away from it.'},
+  {q:'Tell me about a time you simplified a complex process or system.',lp:'Invent and Simplify, Frugality',a:'What was the complexity, why it existed, your new approach, what resistance you faced, and the quantified improvement.',tip:'Quantify: "3 systems → 1 system, onboarding cut from 2 weeks to 2 days" is far more compelling than a general description.'}
 ];
 
-const SYSDESIGN=[
-  {q:'How would you design Amazon\'s order notification system?',lp:'System Design',a:'Clarify: orders/day, channels (push/email/SMS), SLA. Architecture: Kinesis for order events → SNS fan-out → SQS per channel → Lambda consumers. DynamoDB for notification state. Rate limiting per user. DLQs for retries.',tip:'At Amazon scale: Prime Day peaks at ~10k orders/sec. Design for 10× headroom. Use SNS+SQS fan-out — Amazon built SNS for exactly this use case.'},
+const DESIGN=[
+  {q:'How would you design Amazon\'s order notification system?',lp:'System Design',a:'Clarify: orders/day, channels (push/email/SMS), SLA. Architecture: Kinesis → SNS fan-out → SQS per channel → Lambda consumers. DynamoDB for notification state. Rate limiting per user. DLQs for retries.',tip:'At Amazon scale: Prime Day peaks at ~10k orders/sec. Design for 10× headroom. Use SNS+SQS fan-out — Amazon built SNS for exactly this use case.'},
   {q:'SQL vs NoSQL — when would you use each at Amazon?',lp:'Dive Deep',a:'SQL: ACID transactions, complex joins, structured data — order management, financial data. NoSQL (DynamoDB): high throughput, horizontal scale, key-value access patterns — session data, product catalog, event streams.',tip:'At Amazon, DynamoDB is the default for most new services. Know access patterns first, then choose the data store — not the reverse.'},
-  {q:'How do you ensure a distributed system is reliable at Amazon scale?',lp:'Insist on Highest Standards',a:'Redundancy (multi-AZ), circuit breakers, idempotency (safe retries), graceful degradation, chaos engineering, and full observability (CloudWatch + X-Ray).',tip:"Amazon's COE process requires root cause + prevention + detection improvements. Frame reliability answers using that lens."}
+  {q:'How do you ensure a distributed system is reliable at Amazon scale?',lp:'Insist on Highest Standards',a:'Redundancy (multi-AZ), circuit breakers, idempotency (safe retries), graceful degradation, chaos engineering, full observability (CloudWatch + X-Ray).',tip:'Amazon\'s COE process requires root cause + prevention + detection improvements. Frame reliability answers using that lens.'}
 ];
 
 const PM_QA=[
-  {q:'How do you handle two senior stakeholders who want completely different things from your program?',lp:'Earn Trust, Have Backbone',a:'First understand both perspectives fully via separate 1:1s. Find the shared customer goal. Frame the trade-off in customer impact terms. Escalate with a proposed resolution, not just the conflict. Document the decision.',tip:'Avoid: picking a side without escalation, or letting the conflict fester. Amazon expects you to close the loop, not leave it open.'},
-  {q:'You have 3 months, 5 engineers, and 3 competing priorities. Walk me through how you\'d run this program.',lp:'Deliver Results, Prioritize',a:'Start with clarity: one-pager with goals, success metrics, and what\'s explicitly OUT of scope. Prioritize by customer impact × feasibility × strategy. 2-week sprints with milestones. Weekly written status. Flag risks early.',tip:'Amazon expects metrics defined upfront — leading indicators (weekly tracking) and lagging indicators (90-day success).'},
+  {q:'How do you handle two senior stakeholders who want completely different things from your program?',lp:'Earn Trust, Have Backbone',a:'Understand both perspectives via separate 1:1s. Find the shared customer goal. Frame the trade-off in customer impact terms. Escalate with a proposed resolution, not just the conflict. Document the decision.',tip:'Avoid: picking a side without escalation, or letting the conflict fester. Amazon expects you to close the loop.'},
+  {q:'You have 3 months, 5 engineers, and 3 competing priorities. Walk me through how you\'d run this program.',lp:'Deliver Results, Prioritize',a:'One-pager with goals, success metrics, and what\'s explicitly OUT of scope. Prioritize by customer impact × feasibility × strategy. 2-week sprints with milestones. Weekly written status. Flag risks early.',tip:'Amazon expects metrics defined upfront — leading indicators (weekly tracking) and lagging indicators (90-day success).'},
   {q:'How would you run an Operational Readiness Review before a major launch?',lp:'Insist on Highest Standards',a:'Load testing at 2× peak, runbooks for top failure modes, tested rollback plan, monitoring with alerts live before launch, defined pass/fail launch gates, post-launch watch schedule.',tip:'Name the ORR explicitly — it signals you understand how Amazon operates, not just generic PM practices.'}
-];
-
-const PRODUCT_QA=[
-  {q:'Pick an Amazon product you use. What would you improve and why?',lp:'Customer Obsession',a:'CIRCLES: state the product → identify a specific user segment → name the pain point → propose 2–3 improvements → pick the best → define success metrics.',tip:'Be specific about the user segment. "For elderly users living alone" is a PM answer. "For all users" is not.'},
-  {q:'Amazon\'s mobile app conversion rate dropped 15% this week. Diagnose it.',lp:'Dive Deep, Are Right A Lot',a:'Segment (all users? one platform? one category?) → Timeline (sudden or gradual?) → Funnel (where exactly does it drop?) → External factors → Top 3 hypotheses → propose a test for each.',tip:'Don\'t jump to conclusions. The segmentation step is where most candidates fail — do it first, always.'},
-  {q:'How would you prioritize a backlog of 20 features when you can only ship 3 this quarter?',lp:'Customer Obsession, Deliver Results',a:'Filter to customer-facing strategic items → score with RICE (Reach × Impact × Confidence ÷ Effort) → apply constraints → validate with stakeholders → explicitly write what\'s out of scope.',tip:'The "out of scope" list is as important as the priority list. Amazon expects you to manage scope proactively.'}
 ];
 
 const CHECKLIST=[
@@ -773,29 +973,28 @@ const CHECKLIST=[
 ];
 
 const RESOURCES=[
-  {title:'Cracking the PM Interview',desc:'Gayle Laakmann McDowell — frameworks, estimation, product design. The definitive PM prep book.',url:'https://github.com/drew-mn/Books/blob/master/Cracking%20the%20PM%20Interview.pdf',label:'Free PDF'},
+  {title:'Cracking the PM Interview',desc:'Gayle Laakmann McDowell — the definitive PM prep book. Frameworks, estimation, product design.',url:'https://github.com/drew-mn/Books/blob/master/Cracking%20the%20PM%20Interview.pdf',label:'Free PDF'},
   {title:'Open PM Repo',desc:'ProductHired\'s curated list of PM resources — articles, frameworks, interview prep.',url:'https://github.com/ProductHired/open-product-management',label:'GitHub'},
-  {title:'CIRCLES Method',desc:'The most effective product design framework for PM interviews. Read this before your product round.',url:'https://www.impactinterview.com/2016/06/circles-method-product-design-framework/',label:'Read'},
+  {title:'CIRCLES Method',desc:'The most effective product design framework for PM interviews.',url:'https://www.impactinterview.com/2016/06/circles-method-product-design-framework/',label:'Read'},
   {title:'System Design Primer',desc:'Comprehensive system design guide — essential for the technical TPM round.',url:'https://github.com/donnemartin/system-design-primer',label:'GitHub'},
-  {title:'Amazon Leadership Principles',desc:'Official page — read the nuance behind each LP and how they apply to daily decisions.',url:'https://www.amazon.jobs/content/en/our-workplace/leadership-principles',label:'Official'},
+  {title:'Amazon LPs',desc:'Official Amazon page — read the nuance behind each LP and how they apply to daily decisions.',url:'https://www.amazon.jobs/content/en/our-workplace/leadership-principles',label:'Official'},
   {title:'The PM Interview',desc:'Practice PM questions with a timer and structured frameworks.',url:'https://thepminterview.com/',label:'Practice'},
   {title:'Decode and Conquer',desc:'Lewis Lin — ROI analysis, AARM metrics, and Amazon-style PM interview answers.',url:'https://www.amazon.com/Decode-Conquer-Answers-Management-Interviews/dp/0615930417',label:'Amazon'},
-  {title:'StellarPeers Questions',desc:'Community-sourced PM practice questions with discussion and analysis.',url:'https://stellarpeers.com/practice-questions/',label:'Practice'},
+  {title:'StellarPeers',desc:'Community-sourced PM practice questions with discussion and analysis.',url:'https://stellarpeers.com/practice-questions/',label:'Practice'},
   {title:'Big O Cheat Sheet',desc:'Quick reference for algorithm complexity — useful for TPM technical rounds.',url:'https://cooervo.github.io/Algorithms-DataStructures-BigONotation/index.html',label:'Reference'}
 ];
 
-// ── RENDER ────────────────────────────────────────────────────────────────────
-
+/* ── RENDER ──────────────────────────────────────────── */
 function renderRounds(){
   document.getElementById('roundGrid').innerHTML=ROUNDS.map(r=>`
-    <div class="round-card ${r.color}">
-      <div class="rc-icon">${r.icon}</div>
-      <div class="rc-badge">${r.meta}</div>
-      <h3>${r.name}</h3>
-      <p>${r.desc}</p>
-      <div class="rc-footer">
-        <span class="rc-meta"><strong>${r.qs.length}</strong> questions · ${r.dur} min</span>
-        <button class="rc-start" onclick="startRound('${r.id}')">Start →</button>
+    <div class="rcard ${r.cls}">
+      <div class="rcard-icon">${r.icon}</div>
+      <div class="rcard-tag">${r.meta}</div>
+      <div class="rcard-title">${r.name}</div>
+      <div class="rcard-desc">${r.desc}</div>
+      <div class="rcard-footer">
+        <span class="rcard-meta">${r.qs.length} questions · ${r.dur} min</span>
+        <button class="rcard-btn" onclick="startRound('${r.id}')">Start Round →</button>
       </div>
     </div>
   `).join('');
@@ -805,15 +1004,15 @@ function renderLPs(){
   document.getElementById('lpGrid').innerHTML=LPS.map(lp=>`
     <div class="lp-card">
       <div class="lp-head" onclick="toggleLP(this)">
-        <span class="lp-num">${lp.n}</span>
-        <span class="lp-title">${lp.name}</span>
-        <input type="checkbox" class="lp-check" id="lp${lp.n}" onclick="event.stopPropagation()" onchange="updateProgress()" title="I have a STAR story" />
+        <span class="lp-badge">${lp.n}</span>
+        <span class="lp-name">${lp.name}</span>
+        <input type="checkbox" class="lp-chk" id="lp${lp.n}" onclick="event.stopPropagation()" onchange="updateProgress()" title="STAR story ready"/>
         <span class="lp-arr">▼</span>
       </div>
       <div class="lp-body">
         <p class="lp-def">"${lp.def}"</p>
         <div class="lp-qs">
-          <h4>Sample Questions</h4>
+          <div class="lp-qs-title">Sample Questions</div>
           <ul>${lp.qs.map(q=>`<li>${q}</li>`).join('')}</ul>
         </div>
       </div>
@@ -821,38 +1020,33 @@ function renderLPs(){
   `).join('');
 }
 
-function toggleLP(head){
-  head.classList.toggle('open');
-  head.nextElementSibling.classList.toggle('open');
-}
+function toggleLP(h){ h.classList.toggle('open'); h.nextElementSibling.classList.toggle('open'); }
 
 function renderQA(id,data){
   document.getElementById(id).innerHTML=data.map(d=>`
-    <div class="qa-item">
-      <div class="qa-q" onclick="toggleQA(this)">
-        <span>${d.q} <span class="qa-tag">${d.lp}</span></span>
+    <div class="qa-card">
+      <div class="qa-top" onclick="toggleQA(this)">
+        <span class="qa-q-text">${d.q}</span>
+        <span class="qa-lp-tag">${d.lp}</span>
         <span class="qa-arr">▼</span>
       </div>
-      <div class="qa-a">
-        <p>${d.a}</p>
-        <div class="qa-tip">${d.tip}</div>
+      <div class="qa-body">
+        <p class="qa-ans">${d.a}</p>
+        <div class="qa-tip-box">${d.tip}</div>
       </div>
     </div>
   `).join('');
 }
 
-function toggleQA(el){
-  el.classList.toggle('open');
-  el.nextElementSibling.classList.toggle('open');
-}
+function toggleQA(el){ el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
 
 function renderChecklist(){
-  document.getElementById('checklistWrap').innerHTML=CHECKLIST.map((s,si)=>`
-    <div class="check-section">
-      <div class="check-section-title">${s.section}</div>
+  document.getElementById('clGrid').innerHTML=CHECKLIST.map((s,si)=>`
+    <div class="cl-section">
+      <div class="cl-section-title">${s.section}</div>
       ${s.items.map((item,ii)=>{
         const id=`c${si}-${ii}`;
-        return `<div class="check-item" id="ci-${id}">
+        return `<div class="cl-item" id="ci-${id}">
           <input type="checkbox" id="${id}" onchange="handleCheck('${id}')"/>
           <label for="${id}">${item}</label>
         </div>`;
@@ -871,12 +1065,12 @@ function updateProgress(){
   const done=document.querySelectorAll('input[type="checkbox"]:checked');
   const pct=all.length?(done.length/all.length*100):0;
   document.getElementById('progFill').style.width=pct+'%';
-  document.getElementById('progCount').textContent=`${done.length} / ${all.length}`;
+  document.getElementById('progNum').textContent=`${done.length} / ${all.length}`;
 }
 
 function renderResources(){
   document.getElementById('resGrid').innerHTML=RESOURCES.map(r=>`
-    <div class="res-card">
+    <div class="res-item">
       <h4>${r.title}</h4>
       <p>${r.desc}</p>
       <a href="${r.url}" target="_blank">${r.label} →</a>
@@ -884,91 +1078,83 @@ function renderResources(){
   `).join('');
 }
 
-// ── PRACTICE ──────────────────────────────────────────────────────────────────
-
+/* ── PRACTICE ────────────────────────────────────────── */
 let PS={round:null,idx:0,ratings:[],timer:null,secs:0};
 
 function startRound(id){
   const r=ROUNDS.find(x=>x.id===id);
   PS={round:r,idx:0,ratings:new Array(r.qs.length).fill(null),timer:null,secs:r.dur*60};
-  document.getElementById('questionView').style.display='flex';
-  document.getElementById('resultsView').classList.remove('open');
+  document.getElementById('qview').style.display='flex';
+  document.getElementById('rview').classList.remove('open');
   document.getElementById('mName').textContent=r.name;
   document.getElementById('mMeta').textContent=r.meta;
-  showQ();startTimer();
+  showQ(); startTimer();
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
 
 function showQ(){
-  const{round,idx,ratings}=PS,q=round.qs[idx],total=round.qs.length;
-  document.getElementById('mQNum').textContent=`Question ${idx+1} of ${total}`;
+  const{round,idx,ratings}=PS,q=round.qs[idx],tot=round.qs.length;
+  document.getElementById('mQN').textContent=`Question ${idx+1} of ${tot}`;
   document.getElementById('mLP').textContent=q.lp;
   const de=document.getElementById('mDiff');
   de.textContent=q.diff==='core'?'Core':q.diff==='medium'?'Medium':'Hard';
-  de.className='q-diff d-'+q.diff;
+  de.className='qdiff d-'+q.diff;
   document.getElementById('mQ').textContent=q.q;
   document.getElementById('mHint').innerHTML=q.hint;
   document.getElementById('mHint').classList.remove('open');
-  const ht=document.querySelector('.hint-trigger');
-  ht.classList.remove('open');
-  ht.querySelector('span:first-child').textContent='Show Framework & Hints';
-  ht.querySelector('.arr').textContent='▼';
-  document.getElementById('mPbar').style.width=(idx/total*100)+'%';
-  document.getElementById('mCtr').textContent=`${idx+1} / ${total}`;
+  const hb=document.querySelector('.hint-btn');
+  hb.classList.remove('open');
+  hb.querySelector('span:first-child').textContent='Show Framework & Hints';
+  hb.querySelector('.arr').textContent='▼';
+  document.getElementById('mPb').style.width=(idx/tot*100)+'%';
+  document.getElementById('mCtr').textContent=`${idx+1} / ${tot}`;
   document.getElementById('prevBtn').disabled=idx===0;
-  document.getElementById('nextBtn').textContent=idx===total-1?'Finish':'Next →';
-  highlightRating(ratings[idx]);
+  document.getElementById('nextBtn').textContent=idx===tot-1?'Finish':'Next →';
+  highlightR(ratings[idx]);
 }
 
 function toggleHint(btn){
   const body=document.getElementById('mHint');
-  const open=body.classList.toggle('open');
-  btn.classList.toggle('open',open);
-  btn.querySelector('span:first-child').textContent=open?'Hide Framework & Hints':'Show Framework & Hints';
-  btn.querySelector('.arr').textContent=open?'▲':'▼';
+  const o=body.classList.toggle('open');
+  btn.classList.toggle('open',o);
+  btn.querySelector('span:first-child').textContent=o?'Hide Hints':'Show Framework & Hints';
+  btn.querySelector('.arr').textContent=o?'▲':'▼';
 }
 
-function rate(v){PS.ratings[PS.idx]=v;highlightRating(v)}
-function highlightRating(v){
-  document.querySelectorAll('.rate-btn').forEach(b=>b.classList.remove('sel'));
-  if(v){const b=document.querySelector(`.rate-btn.${v}`);if(b)b.classList.add('sel')}
+function rate(v){ PS.ratings[PS.idx]=v; highlightR(v); }
+function highlightR(v){
+  document.querySelectorAll('.rbtn').forEach(b=>b.classList.remove('sel'));
+  if(v){ const b=document.querySelector(`.rbtn.${v}`); if(b) b.classList.add('sel'); }
 }
-function nextQ(){
-  const{round,idx}=PS;
-  if(idx<round.qs.length-1){PS.idx++;showQ()}else showResults();
-}
-function prevQ(){if(PS.idx>0){PS.idx--;showQ()}}
+function nextQ(){ const{round,idx}=PS; if(idx<round.qs.length-1){PS.idx++;showQ();}else showResults(); }
+function prevQ(){ if(PS.idx>0){PS.idx--;showQ();} }
 
 function showResults(){
   clearInterval(PS.timer);
   const{round,ratings}=PS;
   const c={nailed:0,ok:0,struggled:0,skip:0};
-  ratings.forEach(r=>{if(r&&c[r]!==undefined)c[r]++;else if(!r)c.skip++});
-  const total=round.qs.length;
-  document.getElementById('questionView').style.display='none';
-  const rv=document.getElementById('resultsView');rv.classList.add('open');
+  ratings.forEach(r=>{ if(r&&c[r]!==undefined)c[r]++; else if(!r)c.skip++; });
+  const tot=round.qs.length;
+  document.getElementById('qview').style.display='none';
+  document.getElementById('rview').classList.add('open');
   document.getElementById('rTitle').textContent=round.name+' Complete';
-  document.getElementById('rSub').textContent=c.nailed>=Math.ceil(total*0.6)
-    ?'Strong performance — you\'re ready for this round.'
-    :'Keep practicing — review the frameworks for questions you struggled with.';
-  ['nailed','ok','struggled','skip'].forEach(k=>{
-    const pct=total?(c[k]/total*100):0;
-    document.getElementById(`rf-${k}`).style.width=pct+'%';
-    document.getElementById(`rn-${k}`).textContent=c[k];
+  document.getElementById('rSub').textContent=c.nailed>=Math.ceil(tot*.6)?'Strong performance — you\'re ready for this round.':'Keep practicing — review the frameworks for questions you struggled with.';
+  [['nailed','rfN','rnN'],['ok','rfO','rnO'],['struggled','rfS','rnS'],['skip','rfK','rnK']].forEach(([k,fid,nid])=>{
+    document.getElementById(fid).style.width=(tot?(c[k]/tot*100):0)+'%';
+    document.getElementById(nid).textContent=c[k];
   });
 }
 
-function retryRound(){startRound(PS.round.id)}
+function retryRound(){ startRound(PS.round.id); }
 function closePractice(){
   clearInterval(PS.timer);
   document.getElementById('overlay').classList.remove('open');
   document.body.style.overflow='';
 }
-
 function startTimer(){
-  clearInterval(PS.timer);tick();
-  PS.timer=setInterval(()=>{PS.secs--;tick();if(PS.secs<=0){clearInterval(PS.timer);document.getElementById('mTimer').textContent='TIME'}},1000);
+  clearInterval(PS.timer); tick();
+  PS.timer=setInterval(()=>{ PS.secs--; tick(); if(PS.secs<=0){clearInterval(PS.timer);document.getElementById('mTimer').textContent='TIME';} },1000);
 }
 function tick(){
   const m=Math.floor(PS.secs/60),s=PS.secs%60;
@@ -976,37 +1162,29 @@ function tick(){
   el.textContent=`${m}:${s.toString().padStart(2,'0')}`;
   el.classList.toggle('red',PS.secs<=300);
 }
+document.getElementById('overlay').addEventListener('click',e=>{ if(e.target===document.getElementById('overlay'))closePractice(); });
 
-document.getElementById('overlay').addEventListener('click',e=>{
-  if(e.target===document.getElementById('overlay'))closePractice();
-});
-
-// ── NAV ───────────────────────────────────────────────────────────────────────
-
+/* ── NAV HIGHLIGHT ───────────────────────────────────── */
 window.addEventListener('scroll',()=>{
-  const ids=['practice','lps','behavioral','sysdesign','pm','product','checklist','resources'];
+  const ids=['practice','lps','behavioral','design','pm','checklist','resources'];
   let cur='';
-  ids.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-100)cur=id;});
-  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+  ids.forEach(id=>{ const el=document.getElementById(id); if(el&&window.scrollY>=el.offsetTop-100)cur=id; });
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
 },{passive:true});
 
-// ── SCROLL REVEAL ─────────────────────────────────────────────────────────────
+/* ── SCROLL REVEAL ───────────────────────────────────── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting)e.target.classList.add('in'); });
+},{threshold:0.08});
 
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-// ── INIT ──────────────────────────────────────────────────────────────────────
-
+/* ── INIT ────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded',()=>{
-  renderRounds();renderLPs();
+  renderRounds(); renderLPs();
   renderQA('behavioralList',BEHAVIORAL);
-  renderQA('sysdesignList',SYSDESIGN);
+  renderQA('designList',DESIGN);
   renderQA('pmList',PM_QA);
-  renderQA('productList',PRODUCT_QA);
-  renderChecklist();renderResources();updateProgress();
-  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  renderChecklist(); renderResources(); updateProgress();
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 });
 </script>
 </body>
